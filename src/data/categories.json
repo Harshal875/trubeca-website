@@ -1,0 +1,67 @@
+{
+  "categories": [
+    {
+      "id": "tablets-capsules",
+      "name": "Tablets & Capsules",
+      "slug": "tablets-capsules",
+      "description": "Comprehensive range of tablets and capsules covering analgesics, antibiotics, gastrointestinal, cardiovascular, and nutritional supplements.",
+      "productCount": 53,
+      "image": "/images/categories/tablets.jpg",
+      "icon": "pill"
+    },
+    {
+      "id": "syrups",
+      "name": "Syrups & Suspensions",
+      "slug": "syrups",
+      "description": "Liquid formulations including syrups and suspensions for oral administration — pediatric and adult formulations.",
+      "productCount": 35,
+      "image": "/images/categories/syrups.jpg",
+      "icon": "flask-round"
+    },
+    {
+      "id": "dry-syrups",
+      "name": "Dry Syrups",
+      "slug": "dry-syrups",
+      "description": "Powder for oral suspension — reconstituted with water before use. Primarily antibiotic formulations.",
+      "productCount": 6,
+      "image": "/images/categories/dry-syrups.jpg",
+      "icon": "test-tube"
+    },
+    {
+      "id": "pediatric-drops",
+      "name": "Pediatric Drops",
+      "slug": "pediatric-drops",
+      "description": "Specially formulated drops for infants and young children — vitamins, digestive, and fever management.",
+      "productCount": 5,
+      "image": "/images/categories/pediatric-drops.jpg",
+      "icon": "baby"
+    },
+    {
+      "id": "injections",
+      "name": "Injections",
+      "slug": "injections",
+      "description": "Injectable formulations including ampoules, vials, and dispo packs for hospital and clinical use.",
+      "productCount": 13,
+      "image": "/images/categories/injections.jpg",
+      "icon": "syringe"
+    },
+    {
+      "id": "creams-ointments",
+      "name": "Creams & Ointments",
+      "slug": "creams-ointments",
+      "description": "Topical formulations for dermatological and pain relief applications.",
+      "productCount": 3,
+      "image": "/images/categories/creams-ointments.jpg",
+      "icon": "droplets"
+    },
+    {
+      "id": "supplements",
+      "name": "Supplements & Oils",
+      "slug": "supplements",
+      "description": "Nutritional supplements including protein powders and ayurvedic pain relief oils.",
+      "productCount": 3,
+      "image": "/images/categories/supplements.jpg",
+      "icon": "dumbbell"
+    }
+  ]
+}

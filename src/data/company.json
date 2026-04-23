@@ -1,0 +1,103 @@
+{
+  "name": "Trubeca Lifesciences",
+  "legalName": "Trubeca Lifesciences Private Limited",
+  "tagline": "Your Trusted Pharmaceutical Partner",
+  "description": "ISO 9001:2015 certified pharmaceutical company specializing in PCD Pharma Franchise and Third Party Manufacturing across India.",
+  "founded": "2015",
+  "address": {
+    "street": "SCF-431, 2nd Floor",
+    "area": "Manimajra",
+    "city": "Chandigarh",
+    "state": "Chandigarh",
+    "pincode": "160101",
+    "country": "India",
+    "full": "SCF-431, 2nd Floor, Manimajra, Chandigarh — 160101"
+  },
+  "phone": ["+91-8699836998", "+91-8699826998"],
+  "whatsapp": "918699826998",
+  "email": "care@trubeca.com",
+  "website": "https://trubeca.com",
+  "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3430.0!2d76.83!3d30.73!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sTrubeca+Lifesciences!5e0!3m2!1sen!2sin!4v1",
+  "certifications": [
+    {
+      "name": "ISO 9001:2015",
+      "shortName": "ISO",
+      "description": "Quality Management System Certification — internationally recognized standard ensuring consistent quality in manufacturing and service delivery.",
+      "image": "/images/certifications/iso-certificate.jpg"
+    },
+    {
+      "name": "FSSAI Certified",
+      "shortName": "FSSAI",
+      "description": "Food Safety and Standards Authority of India — ensures that nutritional supplements and food-grade pharmaceutical products meet safety standards.",
+      "image": "/images/certifications/fssai-certificate.jpg"
+    },
+    {
+      "name": "DCGI Approved",
+      "shortName": "DCGI",
+      "description": "Drug Controller General of India — all our pharmaceutical products are approved by India's central drug regulatory authority.",
+      "image": "/images/certifications/dcgi-certificate.jpg"
+    },
+    {
+      "name": "GMP Compliant",
+      "shortName": "GMP",
+      "description": "Good Manufacturing Practices — our manufacturing processes follow WHO-GMP guidelines for pharmaceutical production.",
+      "image": "/images/certifications/gmp-certificate.jpg"
+    }
+  ],
+  "stats": {
+    "totalProducts": 118,
+    "yearsInBusiness": 10,
+    "categories": 7,
+    "distributionPartners": "500+"
+  },
+  "services": [
+    {
+      "title": "PCD Pharma Franchise",
+      "description": "Start your own pharma business with monopoly rights, marketing support, and our complete product portfolio.",
+      "href": "/pcd-pharma-franchise",
+      "icon": "handshake"
+    },
+    {
+      "title": "Third Party Manufacturing",
+      "description": "Contract manufacturing with best price assurance — tablets, capsules, injectables, syrups, and more.",
+      "href": "/third-party-manufacturing",
+      "icon": "factory"
+    },
+    {
+      "title": "Brand Building & Marketing",
+      "description": "Complete marketing support including visual aids, product literature, and promotional materials.",
+      "href": "/pcd-pharma-franchise",
+      "icon": "megaphone"
+    },
+    {
+      "title": "Research & Development",
+      "description": "Continuous R&D for new formulations, quality improvement, and staying ahead of market needs.",
+      "href": "/about",
+      "icon": "microscope"
+    }
+  ],
+  "whyChooseUs": [
+    {
+      "title": "Quality Certified",
+      "description": "All products certified by FSSAI, DCGI, and manufactured under ISO 9001:2015 and WHO-GMP standards.",
+      "icon": "shield-check"
+    },
+    {
+      "title": "118+ Product Range",
+      "description": "Comprehensive portfolio across 7 categories — from analgesics and antibiotics to syrups and injectables.",
+      "icon": "package"
+    },
+    {
+      "title": "Franchise Support",
+      "description": "Monopoly rights in your territory, free promotional material, no sales targets, and dedicated support.",
+      "icon": "users"
+    }
+  ],
+  "about": {
+    "short": "Trubeca Lifesciences is an ISO 9001:2015 certified pharmaceutical company based in Chandigarh, India. For over a decade, we've been developing, manufacturing, and distributing high-quality pharmaceutical products across India. Our portfolio spans 118+ products including tablets, capsules, syrups, injections, and more.",
+    "full": "Founded in Chandigarh over a decade ago, Trubeca Lifesciences set out with a clear mission: make quality pharmaceutical products accessible across India. Today, we manufacture and distribute 118+ products across 7 therapeutic categories — from hospitals and clinics in metropolitan cities to dispensaries in smaller towns.\n\nOur ISO 9001:2015 certified operations, combined with FSSAI, DCGI, and FDA compliant products, have earned the trust of hundreds of distribution partners nationwide. We focus on identifying, developing, and supplying quality pharmaceutical medicine throughout the country.\n\nAs an innovation-driven pharmaceutical company, we serve patients and those with unmet medical needs for which few effective treatments are available. By enhancing our product quality and services, we have earned a strong position in the pharma sector with distribution spread across the entire nation.",
+    "portfolio": "We have set new benchmarks in the market and are exporting and supplying various kinds of Tablets, Capsules, Injections, Dry Syrups & Liquid Syrups. These are processed from fine techniques and quality formulations and materials, known for purity, efficacy, and reliability. They are utilized in numerous segments such as hospitals, dispensaries, and nursing homes. The entire formulation process is carried out under the guidance and supervision of our industry-experienced quality controllers.",
+    "team": "Our highly qualified, talented, and experienced personnel are consistently involved in formulating supreme quality drugs at reasonable rates. Our team members are highly skilled and have adequate knowledge of the Pharmaceutical Industry. They are involved in random surveys to assess market tastes and clients' needs, with regular training to keep abreast of industry's changing demands.",
+    "rnd": "Our R&D department consists of industry-experienced and highly qualified personnel. Our scientists are consistently involved in surveys and research to improve quality of our drugs and to gauge clients' tastes and changing requirements. We keep a tab on new machines and technologies entering the market, adhering to industry-leading guidelines."
+  }
+}
