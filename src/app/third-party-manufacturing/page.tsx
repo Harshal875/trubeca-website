@@ -83,7 +83,7 @@ export default function ThirdPartyPage() {
       {/* ─── Overview ─── */}
       <section className="bg-white">
         <div className="container-main section-padding">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div>
               <SectionHeading
                 badge="Contract Manufacturing"
@@ -112,7 +112,7 @@ export default function ThirdPartyPage() {
               </div>
             </div>
             <div className="aspect-[4/3] bg-gradient-to-br from-navy-50 to-brand-50 rounded-2xl flex items-center justify-center">
-              <Factory className="w-24 h-24 text-navy-200" />
+              <Factory className="w-16 h-16 sm:w-24 sm:h-24 text-navy-200" />
             </div>
           </div>
         </div>
@@ -126,11 +126,11 @@ export default function ThirdPartyPage() {
             title="Manufacturing Excellence"
             subtitle="We bring world-class manufacturing capabilities to your brand."
           />
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {capabilities.map((cap) => (
               <div
                 key={cap.title}
-                className="card p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                className="card p-5 sm:p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
               >
                 <cap.icon className="w-8 h-8 text-brand-500 mb-4" />
                 <h3 className="font-semibold text-navy-900 mb-2">{cap.title}</h3>
@@ -150,13 +150,13 @@ export default function ThirdPartyPage() {
             subtitle="We offer manufacturing across all major pharmaceutical dosage forms."
             light
           />
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
             {dosageForms.map((form) => (
               <div
                 key={form}
-                className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg p-4"
+                className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg p-3 sm:p-4"
               >
-                <CheckCircle2 className="w-5 h-5 text-brand-400 shrink-0" />
+                <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-brand-400 shrink-0" />
                 <span className="font-medium">{form}</span>
               </div>
             ))}
@@ -172,7 +172,7 @@ export default function ThirdPartyPage() {
             title="How It Works"
             subtitle="A streamlined process from enquiry to delivery."
           />
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {[
               { step: "01", title: "Enquiry & Discussion", desc: "Share your requirements — products, quantity, packaging preferences." },
               { step: "02", title: "Quotation & Agreement", desc: "We provide competitive pricing and terms. Sign the manufacturing agreement." },
@@ -180,7 +180,7 @@ export default function ThirdPartyPage() {
               { step: "04", title: "QC & Delivery", desc: "Rigorous quality testing followed by packaging and dispatch to your location." },
             ].map((s) => (
               <div key={s.step} className="text-center">
-                <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-navy-800 text-brand-400 flex items-center justify-center text-xl font-bold">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-3 sm:mb-4 rounded-full bg-navy-800 text-brand-400 flex items-center justify-center text-lg sm:text-xl font-bold">
                   {s.step}
                 </div>
                 <h3 className="font-semibold text-navy-900 mb-2">{s.title}</h3>
@@ -200,7 +200,7 @@ export default function ThirdPartyPage() {
               title="Request Third Party Manufacturing"
               subtitle="Tell us your requirements and we'll get back to you with a competitive quote."
             />
-            <div className="bg-white rounded-xl p-6 md:p-8 border border-gray-200">
+            <div className="bg-white rounded-xl p-5 sm:p-6 md:p-8 border border-gray-200">
               <EnquiryForm />
             </div>
           </div>

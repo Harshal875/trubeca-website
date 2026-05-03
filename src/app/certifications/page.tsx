@@ -119,11 +119,11 @@ export default function CertificationsPage() {
             title="Internationally Certified Quality"
             subtitle="We hold multiple certifications that validate our commitment to pharmaceutical excellence."
           />
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
             {certifications.map((cert) => (
               <div
                 key={cert.name}
-                className="card p-6 md:p-8 border-l-4 border-brand-500 hover:shadow-lg transition-shadow"
+                className="card p-5 sm:p-6 md:p-8 border-l-4 border-brand-500 hover:shadow-lg transition-shadow"
               >
                 <div className="flex items-center gap-3 mb-4">
                   <cert.icon className="w-8 h-8 text-brand-500" />
@@ -154,11 +154,11 @@ export default function CertificationsPage() {
             title="Our Quality Process"
             subtitle="Quality is not just a certification — it's embedded in every step of our operations."
           />
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {qualityPillars.map((pillar, i) => (
               <div
                 key={i}
-                className="card p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                className="card p-5 sm:p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
               >
                 <div className="w-10 h-10 rounded-lg bg-navy-800 text-brand-400 flex items-center justify-center text-sm font-bold mb-4">
                   {String(i + 1).padStart(2, "0")}
@@ -173,11 +173,11 @@ export default function CertificationsPage() {
 
       {/* ─── CTA ─── */}
       <section className="bg-gradient-to-r from-brand-500 to-brand-600 text-white">
-        <div className="container-main py-14 text-center">
-          <h2 className="text-section font-bold mb-4">
+        <div className="container-main py-10 sm:py-14 text-center">
+          <h2 className="text-section md:text-section-md font-bold mb-3 sm:mb-4">
             Quality You Can Trust
           </h2>
-          <p className="text-lg text-white/80 mb-8 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-white/80 mb-6 sm:mb-8 max-w-2xl mx-auto">
             Partner with a certified pharmaceutical company that puts quality and safety above everything else.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

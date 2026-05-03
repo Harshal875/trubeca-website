@@ -96,7 +96,14 @@ export default function Header() {
                 {link.label}
               </Link>
             ))}
-            <div className="pt-3 border-t border-gray-100">
+            <div className="pt-3 border-t border-gray-100 space-y-2">
+              <a
+                href="tel:+918699836998"
+                className="flex items-center justify-center gap-2 w-full px-4 py-3 text-sm font-medium text-gray-700 hover:text-brand-500"
+              >
+                <Phone className="w-4 h-4" />
+                +91-8699836998
+              </a>
               <Link
                 href="/contact"
                 onClick={() => setMobileOpen(false)}

@@ -86,11 +86,11 @@ export default function PCDFranchisePage() {
             title="Benefits of Trubeca PCD Franchise"
             subtitle="We provide everything you need to build a successful pharmaceutical business."
           />
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {benefits.map((b) => (
               <div
                 key={b.title}
-                className="card p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                className="card p-5 sm:p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
               >
                 <b.icon className="w-8 h-8 text-brand-500 mb-4" />
                 <h3 className="font-semibold text-navy-900 mb-2">{b.title}</h3>
@@ -109,10 +109,10 @@ export default function PCDFranchisePage() {
             title="How to Get Started"
             subtitle="4 simple steps to launch your pharma franchise business."
           />
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {steps.map((s) => (
               <div key={s.step} className="relative text-center">
-                <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-brand-500 text-white flex items-center justify-center text-xl font-bold">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-3 sm:mb-4 rounded-full bg-brand-500 text-white flex items-center justify-center text-lg sm:text-xl font-bold">
                   {s.step}
                 </div>
                 <h3 className="font-semibold text-navy-900 mb-2">{s.title}</h3>
@@ -132,7 +132,7 @@ export default function PCDFranchisePage() {
             subtitle="Our franchise partners get access to 100+ products across all major therapeutic segments."
             light
           />
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
             {[
               "Tablets & Capsules",
               "Syrups & Suspensions",
@@ -145,10 +145,10 @@ export default function PCDFranchisePage() {
             ].map((item) => (
               <div
                 key={item}
-                className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg p-3"
+                className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg p-2.5 sm:p-3"
               >
-                <CheckCircle2 className="w-4 h-4 text-brand-400 shrink-0" />
-                <span className="text-sm">{item}</span>
+                <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-brand-400 shrink-0" />
+                <span className="text-xs sm:text-sm">{item}</span>
               </div>
             ))}
           </div>
@@ -172,7 +172,7 @@ export default function PCDFranchisePage() {
               title="Apply for PCD Pharma Franchise"
               subtitle="Fill the form below and our team will get back to you within 24 hours."
             />
-            <div className="bg-gray-50 rounded-xl p-6 md:p-8 border border-gray-200">
+            <div className="bg-gray-50 rounded-xl p-5 sm:p-6 md:p-8 border border-gray-200">
               <EnquiryForm />
             </div>
           </div>

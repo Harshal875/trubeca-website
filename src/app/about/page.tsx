@@ -32,7 +32,7 @@ export default function AboutPage() {
       {/* ─── Story ─── */}
       <section className="bg-white">
         <div className="container-main section-padding">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div>
               <SectionHeading
                 badge="Our Story"
@@ -47,7 +47,7 @@ export default function AboutPage() {
             </div>
             <div className="relative">
               <div className="aspect-square bg-gradient-to-br from-brand-50 to-blue-50 rounded-2xl flex items-center justify-center">
-                <FlaskConical className="w-32 h-32 text-brand-200" />
+                <FlaskConical className="w-20 h-20 sm:w-32 sm:h-32 text-brand-200" />
               </div>
             </div>
           </div>
@@ -64,8 +64,8 @@ export default function AboutPage() {
       {/* ─── Vision & Mission ─── */}
       <section className="bg-gray-50">
         <div className="container-main section-padding">
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="card p-8 border-l-4 border-brand-500">
+          <div className="grid md:grid-cols-2 gap-4 sm:gap-8">
+            <div className="card p-5 sm:p-8 border-l-4 border-brand-500">
               <div className="flex items-center gap-3 mb-4">
                 <Target className="w-8 h-8 text-brand-500" />
                 <h3 className="text-xl font-bold text-navy-900">Our Mission</h3>
@@ -76,7 +76,7 @@ export default function AboutPage() {
                 through our PCD Franchise and Third Party Manufacturing models.
               </p>
             </div>
-            <div className="card p-8 border-l-4 border-trust-green">
+            <div className="card p-5 sm:p-8 border-l-4 border-trust-green">
               <div className="flex items-center gap-3 mb-4">
                 <Eye className="w-8 h-8 text-trust-green" />
                 <h3 className="text-xl font-bold text-navy-900">Our Vision</h3>
@@ -121,10 +121,10 @@ export default function AboutPage() {
       {/* ─── R&D ─── */}
       <section className="bg-gray-50">
         <div className="container-main section-padding">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div className="order-2 lg:order-1">
               <div className="aspect-[4/3] bg-gradient-to-br from-navy-50 to-brand-50 rounded-2xl flex items-center justify-center">
-                <FlaskConical className="w-24 h-24 text-navy-200" />
+                <FlaskConical className="w-16 h-16 sm:w-24 sm:h-24 text-navy-200" />
               </div>
             </div>
             <div className="order-1 lg:order-2">
@@ -147,9 +147,9 @@ export default function AboutPage() {
 
       {/* ─── CTA ─── */}
       <section className="bg-gradient-to-r from-brand-500 to-brand-600 text-white">
-        <div className="container-main py-14 text-center">
-          <h2 className="text-section font-bold mb-4">Partner with Trubeca</h2>
-          <p className="text-lg text-white/80 mb-8 max-w-2xl mx-auto">
+        <div className="container-main py-10 sm:py-14 text-center">
+          <h2 className="text-section md:text-section-md font-bold mb-3 sm:mb-4">Partner with Trubeca</h2>
+          <p className="text-base sm:text-lg text-white/80 mb-6 sm:mb-8 max-w-2xl mx-auto">
             Ready to start your pharma business or need contract manufacturing? Let&apos;s build something great together.
           </p>
           <Link

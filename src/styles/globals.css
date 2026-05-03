@@ -26,21 +26,21 @@
   }
 
   .section-padding {
-    @apply py-16 md:py-20 lg:py-24;
+    @apply py-12 md:py-16 lg:py-24;
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white bg-brand-500 rounded-lg
+    @apply inline-flex items-center justify-center px-5 py-2.5 sm:px-6 sm:py-3 text-sm font-semibold text-white bg-brand-500 rounded-lg
            hover:bg-brand-600 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-brand-500 border-2 border-brand-500 rounded-lg
+    @apply inline-flex items-center justify-center px-5 py-2.5 sm:px-6 sm:py-3 text-sm font-semibold text-brand-500 border-2 border-brand-500 rounded-lg
            hover:bg-brand-50 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2;
   }
 
   .btn-cta {
-    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white bg-trust-orange rounded-lg
+    @apply inline-flex items-center justify-center px-5 py-2.5 sm:px-6 sm:py-3 text-sm font-semibold text-white bg-trust-orange rounded-lg
            hover:bg-orange-700 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-trust-orange focus:ring-offset-2;
   }
 
@@ -51,7 +51,7 @@
   }
 
   .card {
-    @apply bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-200;
+    @apply bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-200 p-4 sm:p-5;
   }
 }
 

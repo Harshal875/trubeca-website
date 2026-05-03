@@ -36,7 +36,7 @@ export default function Footer() {
             <p className="text-gray-400 text-sm leading-relaxed mb-4">
               {company.about.short}
             </p>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
               {company.certifications.map((cert) => (
                 <span
                   key={cert.shortName}

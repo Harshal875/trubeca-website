@@ -57,11 +57,11 @@ export default async function ProductDetailPage({
       {/* Product Detail */}
       <section className="bg-white">
         <div className="container-main py-8 md:py-14">
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16">
             {/* Image */}
             <div>
-              <div className="aspect-square bg-gradient-to-br from-brand-50 to-blue-50 rounded-2xl flex items-center justify-center sticky top-24">
-                <Pill className="w-24 h-24 text-brand-200" />
+              <div className="aspect-square bg-gradient-to-br from-brand-50 to-blue-50 rounded-2xl flex items-center justify-center lg:sticky lg:top-24">
+                <Pill className="w-16 h-16 sm:w-24 sm:h-24 text-brand-200" />
               </div>
             </div>
 
@@ -70,7 +70,7 @@ export default async function ProductDetailPage({
               <span className="inline-block px-2.5 py-1 text-xs uppercase tracking-wide font-semibold bg-brand-50 text-brand-600 rounded mb-3">
                 {product.category.replace(/-/g, " ")}
               </span>
-              <h1 className="text-page-title font-bold text-navy-900 mb-4">
+              <h1 className="text-page-title md:text-page-title-md font-bold text-navy-900 mb-4">
                 {product.brandName}
               </h1>
 
@@ -115,7 +115,7 @@ export default async function ProductDetailPage({
               </div>
 
               {/* Enquiry Form */}
-              <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
+              <div className="bg-gray-50 rounded-xl p-4 sm:p-6 border border-gray-200">
                 <h3 className="text-lg font-semibold text-navy-900 mb-4">
                   Quick Enquiry
                 </h3>
@@ -139,7 +139,7 @@ export default async function ProductDetailPage({
                 View All <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
               {related.map((p) => (
                 <ProductCard key={p.id} product={p} />
               ))}

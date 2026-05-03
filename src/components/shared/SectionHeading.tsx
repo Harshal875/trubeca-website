@@ -14,7 +14,7 @@ export default function SectionHeading({
   light = false,
 }: SectionHeadingProps) {
   return (
-    <div className={`mb-10 md:mb-14 ${align === "center" ? "text-center" : "text-left"}`}>
+    <div className={`mb-8 md:mb-14 ${align === "center" ? "text-center" : "text-left"}`}>
       {badge && (
         <span
           className={`inline-block px-3 py-1 text-xs font-semibold uppercase tracking-wider rounded-full mb-3 ${
@@ -27,7 +27,7 @@ export default function SectionHeading({
         </span>
       )}
       <h2
-        className={`text-section font-bold leading-tight ${
+        className={`text-section md:text-section-md font-bold leading-tight ${
           light ? "text-white" : "text-navy-900"
         }`}
       >
@@ -35,7 +35,7 @@ export default function SectionHeading({
       </h2>
       {subtitle && (
         <p
-          className={`mt-3 max-w-2xl text-body-lg ${
+          className={`mt-2 sm:mt-3 max-w-2xl text-body-lg md:text-body-lg-md ${
             align === "center" ? "mx-auto" : ""
           } ${light ? "text-gray-300" : "text-gray-500"}`}
         >

@@ -54,17 +54,17 @@ export default function ContactPage() {
       {/* ─── Contact Methods ─── */}
       <section className="bg-white">
         <div className="container-main section-padding">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
             {contactMethods.map((method) => (
               <a
                 key={method.title}
                 href={method.action}
                 target={method.title === "Visit Us" || method.title === "WhatsApp" ? "_blank" : undefined}
                 rel={method.title === "Visit Us" || method.title === "WhatsApp" ? "noopener noreferrer" : undefined}
-                className="card p-6 text-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group"
+                className="card p-4 sm:p-6 text-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group"
               >
-                <div className="w-12 h-12 mx-auto mb-3 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center group-hover:bg-brand-500 group-hover:text-white transition-colors">
-                  <method.icon className="w-6 h-6" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-2 sm:mb-3 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center group-hover:bg-brand-500 group-hover:text-white transition-colors">
+                  <method.icon className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
                 <h3 className="font-semibold text-navy-900 mb-1">{method.title}</h3>
                 <p className="text-sm text-gray-500 mb-3">{method.detail}</p>
@@ -80,7 +80,7 @@ export default function ContactPage() {
       {/* ─── Form + Map ─── */}
       <section className="bg-gray-50">
         <div className="container-main section-padding">
-          <div className="grid lg:grid-cols-2 gap-10">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-10">
             {/* Form */}
             <div>
               <SectionHeading
@@ -89,7 +89,7 @@ export default function ContactPage() {
                 subtitle="Fill out the form and our team will respond within 24 hours."
                 align="left"
               />
-              <div className="bg-white rounded-xl p-6 md:p-8 border border-gray-200">
+              <div className="bg-white rounded-xl p-5 sm:p-6 md:p-8 border border-gray-200">
                 <EnquiryForm />
               </div>
             </div>
