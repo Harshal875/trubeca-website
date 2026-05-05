@@ -7,9 +7,9 @@ import {
   FileCheck,
   ArrowRight,
   BadgeCheck,
+  Sparkles,
 } from "lucide-react";
-import PageHeader from "@/components/shared/PageHeader";
-import SectionHeading from "@/components/shared/SectionHeading";
+import { Reveal, StaggerChildren, StaggerItem, GradientText } from "@/components/ui/animations";
 import company from "@/data/company.json";
 
 export const metadata: Metadata = {
@@ -105,95 +105,132 @@ const qualityPillars = [
 export default function CertificationsPage() {
   return (
     <>
-      <PageHeader
-        title="Certifications & Quality"
-        subtitle="Our commitment to quality is backed by internationally recognized certifications and rigorous quality processes."
-        breadcrumbs={[{ label: "Certifications" }]}
-      />
+      {/* ─── Page Header ─── */}
+      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden bg-navy-950">
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-br from-navy-950 via-navy-900 to-brand-900" />
+          <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-trust-green/10 rounded-full blur-[120px]" />
+        </div>
+        <div className="container-main relative z-10">
+          <Reveal>
+            <span className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium uppercase tracking-wider bg-white/5 text-white/70 rounded-full border border-white/10">
+              <Sparkles className="w-3.5 h-3.5" />
+              Quality & Trust
+            </span>
+            <h1 className="mt-6 text-display-sm md:text-display-lg text-white text-balance">
+              Certifications & <GradientText>Quality</GradientText>
+            </h1>
+            <p className="mt-4 text-lg text-white/50 max-w-2xl">
+              Our commitment to quality is backed by internationally recognized certifications and rigorous quality processes.
+            </p>
+          </Reveal>
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white to-transparent" />
+      </section>
 
       {/* ─── Certification Cards ─── */}
-      <section className="bg-white">
-        <div className="container-main section-padding">
-          <SectionHeading
-            badge="Our Certifications"
-            title="Internationally Certified Quality"
-            subtitle="We hold multiple certifications that validate our commitment to pharmaceutical excellence."
-          />
-          <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
+      <section className="section-padding">
+        <div className="container-main">
+          <Reveal>
+            <div className="text-center max-w-2xl mx-auto">
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-brand-600 bg-brand-50 rounded-full">
+                Our Certifications
+              </span>
+              <h2 className="mt-5 text-display-sm md:text-display text-balance">
+                Internationally Certified <GradientText>Quality</GradientText>
+              </h2>
+              <p className="mt-4 text-gray-500 text-lg">
+                We hold multiple certifications that validate our commitment to pharmaceutical excellence.
+              </p>
+            </div>
+          </Reveal>
+          <StaggerChildren className="mt-14 grid md:grid-cols-2 gap-6" staggerDelay={0.1}>
             {certifications.map((cert) => (
-              <div
-                key={cert.name}
-                className="card p-5 sm:p-6 md:p-8 border-l-4 border-brand-500 hover:shadow-lg transition-shadow"
-              >
-                <div className="flex items-center gap-3 mb-4">
-                  <cert.icon className="w-8 h-8 text-brand-500" />
-                  <h3 className="text-xl font-bold text-navy-900">{cert.name}</h3>
+              <StaggerItem key={cert.name}>
+                <div className="p-6 md:p-8 bg-white rounded-2xl border border-gray-100 shadow-card hover:shadow-card-hover transition-all duration-500">
+                  <div className="flex items-center gap-3 mb-5">
+                    <div className="w-12 h-12 rounded-xl bg-brand-50 flex items-center justify-center">
+                      <cert.icon className="w-6 h-6 text-brand-500" />
+                    </div>
+                    <h3 className="text-xl font-bold text-navy-900">{cert.name}</h3>
+                  </div>
+                  <p className="text-gray-500 text-sm leading-relaxed mb-5">
+                    {cert.description}
+                  </p>
+                  <ul className="space-y-2.5">
+                    {cert.benefits.map((b) => (
+                      <li key={b} className="flex items-center gap-3 text-sm text-gray-600">
+                        <CheckCircle2 className="w-4 h-4 text-trust-green shrink-0" />
+                        {b}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <p className="text-gray-600 text-sm leading-relaxed mb-4">
-                  {cert.description}
-                </p>
-                <ul className="space-y-2">
-                  {cert.benefits.map((b) => (
-                    <li key={b} className="flex items-center gap-2 text-sm text-gray-600">
-                      <CheckCircle2 className="w-4 h-4 text-trust-green shrink-0" />
-                      {b}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerChildren>
         </div>
       </section>
 
       {/* ─── Quality Pillars ─── */}
-      <section className="bg-gray-50">
-        <div className="container-main section-padding">
-          <SectionHeading
-            badge="Quality Assurance"
-            title="Our Quality Process"
-            subtitle="Quality is not just a certification — it's embedded in every step of our operations."
-          />
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+      <section className="section-padding bg-gray-50/50">
+        <div className="container-main">
+          <Reveal>
+            <div className="text-center max-w-2xl mx-auto">
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-brand-600 bg-brand-50 rounded-full">
+                Quality Assurance
+              </span>
+              <h2 className="mt-5 text-display-sm md:text-display text-balance">
+                Our Quality <GradientText>Process</GradientText>
+              </h2>
+              <p className="mt-4 text-gray-500 text-lg">
+                Quality is not just a certification — it&apos;s embedded in every step of our operations.
+              </p>
+            </div>
+          </Reveal>
+          <StaggerChildren className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-6" staggerDelay={0.08}>
             {qualityPillars.map((pillar, i) => (
-              <div
-                key={i}
-                className="card p-5 sm:p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
-              >
-                <div className="w-10 h-10 rounded-lg bg-navy-800 text-brand-400 flex items-center justify-center text-sm font-bold mb-4">
-                  {String(i + 1).padStart(2, "0")}
+              <StaggerItem key={i}>
+                <div className="p-6 md:p-8 bg-white rounded-2xl border border-gray-100 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-500">
+                  <div className="w-10 h-10 rounded-xl bg-navy-900 text-brand-400 flex items-center justify-center text-sm font-bold">
+                    {String(i + 1).padStart(2, "0")}
+                  </div>
+                  <h3 className="mt-5 font-semibold text-navy-900">{pillar.title}</h3>
+                  <p className="mt-3 text-sm text-gray-500 leading-relaxed">{pillar.description}</p>
                 </div>
-                <h3 className="font-semibold text-navy-900 mb-2">{pillar.title}</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">{pillar.description}</p>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerChildren>
         </div>
       </section>
 
       {/* ─── CTA ─── */}
-      <section className="bg-gradient-to-r from-brand-500 to-brand-600 text-white">
-        <div className="container-main py-10 sm:py-14 text-center">
-          <h2 className="text-section md:text-section-md font-bold mb-3 sm:mb-4">
-            Quality You Can Trust
-          </h2>
-          <p className="text-base sm:text-lg text-white/80 mb-6 sm:mb-8 max-w-2xl mx-auto">
-            Partner with a certified pharmaceutical company that puts quality and safety above everything else.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/products"
-              className="inline-flex items-center gap-2 px-8 py-3.5 bg-white text-brand-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors"
-            >
-              Explore Products <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 px-8 py-3.5 border-2 border-white/30 text-white font-semibold rounded-lg hover:bg-white/10 transition-colors"
-            >
-              Contact Us
-            </Link>
-          </div>
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-600 via-brand-500 to-accent-cyan" />
+        <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`, backgroundSize: "40px 40px" }} />
+        <div className="container-main relative z-10 py-20 md:py-28 text-center">
+          <Reveal>
+            <h2 className="text-display-sm md:text-display text-white text-balance">
+              Quality You Can Trust
+            </h2>
+            <p className="mt-5 text-lg text-white/70 max-w-2xl mx-auto">
+              Partner with a certified pharmaceutical company that puts quality and safety above everything else.
+            </p>
+            <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                href="/products"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-white text-brand-600 font-semibold rounded-full hover:bg-gray-50 transition-all duration-300 shadow-xl"
+              >
+                Explore Products <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 px-8 py-4 border-2 border-white/25 text-white font-semibold rounded-full hover:bg-white/10 hover:border-white/40 transition-all duration-300"
+              >
+                Contact Us
+              </Link>
+            </div>
+          </Reveal>
         </div>
       </section>
     </>
