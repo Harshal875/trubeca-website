@@ -1,24 +1,30 @@
-import { Shield } from "lucide-react";
-import company from "@/data/company.json";
+import { Settings2 } from "lucide-react";
+
+const items = [
+  "ISO 9001:2015 Certified Manufacturing",
+  "118+ WHO-GMP Pharmaceutical Products",
+  "500+ Distribution Partners Nationwide",
+  "10+ Years of Pharmaceutical Excellence",
+  "FSSAI & DCGI Approved Products",
+  "PCD Pharma Franchise Available",
+  "Third-Party Manufacturing Experts",
+  "Pan India Distribution Network",
+];
 
 export default function TrustBar() {
+  // Duplicate items for seamless infinite loop
+  const repeated = [...items, ...items];
+
   return (
-    <div className="bg-navy-900 text-white py-1.5 sm:py-2">
-      <div className="container-main flex items-center justify-center gap-1.5 sm:gap-2 text-[10px] sm:text-sm overflow-hidden">
-        <Shield className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-brand-400 shrink-0" />
-        <p className="flex items-center gap-1 sm:gap-1.5 flex-wrap justify-center truncate">
-          {company.certifications.map((cert, i) => (
-            <span key={cert.shortName}>
-              <span className="font-semibold text-brand-300">{cert.shortName}</span>
-              {i < company.certifications.length - 1 && (
-                <span className="text-gray-500 ml-1 sm:ml-1.5">•</span>
-              )}
-            </span>
-          ))}
-          <span className="text-gray-400 ml-1">Certified</span>
-          <span className="hidden sm:inline text-gray-500">•</span>
-          <span className="hidden sm:inline text-gray-400">Pan India Distribution</span>
-        </p>
+    <div className="bg-navy-900 border-b border-white/5 text-white py-2 overflow-hidden">
+      <div className="flex w-max animate-marquee hover:[animation-play-state:paused]">
+        {repeated.map((item, i) => (
+          <span key={i} className="flex items-center gap-2 px-6 text-[11px] sm:text-xs font-medium tracking-wide whitespace-nowrap">
+            <Settings2 className="w-3 h-3 text-brand-400 shrink-0" />
+            <span className="text-gray-300">{item}</span>
+            <span className="text-gray-600 ml-4">✦</span>
+          </span>
+        ))}
       </div>
     </div>
   );

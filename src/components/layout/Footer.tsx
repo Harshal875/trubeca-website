@@ -21,31 +21,32 @@ const businessLinks = [
 export default function Footer() {
   return (
     <footer className="relative bg-navy-950 text-white overflow-hidden">
-      {/* Background accent */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-brand-500/5 rounded-full blur-[120px]" />
-      
+      {/* Subtle gradient accents */}
+      <div className="absolute top-0 left-1/4 w-[600px] h-[300px] bg-brand-500/[0.03] rounded-full blur-[120px]" />
+      <div className="absolute bottom-0 right-1/4 w-[400px] h-[200px] bg-accent-violet/[0.03] rounded-full blur-[100px]" />
+
       <div className="relative">
         {/* Main Footer */}
         <div className="container-main pt-20 pb-12">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
-            {/* Column 1: Brand */}
-            <div className="lg:col-span-1">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
+            {/* Brand - spans 4 cols */}
+            <div className="lg:col-span-4">
               <Link href="/" className="inline-block">
-                <span className="text-2xl font-extrabold tracking-tight">
+                <span className="text-2xl font-extrabold tracking-tight font-display">
                   tru<span className="text-brand-400">beca</span>
                 </span>
                 <span className="block text-[9px] uppercase tracking-[0.2em] text-gray-500 mt-0.5">
-                  Life Sciences
+                  Lifesciences
                 </span>
               </Link>
               <p className="mt-5 text-sm text-gray-400 leading-relaxed max-w-xs">
-                ISO certified pharmaceutical company specializing in quality healthcare products, PCD Franchise & contract manufacturing.
+                ISO 9001:2015 certified pharmaceutical company delivering 118+ quality healthcare products through PCD Franchise & Contract Manufacturing.
               </p>
               <div className="mt-6 flex flex-wrap gap-2">
                 {company.certifications.map((cert) => (
                   <span
                     key={cert.shortName}
-                    className="px-2.5 py-1 text-[10px] uppercase tracking-wider font-semibold bg-white/5 text-brand-300 rounded-full border border-white/10"
+                    className="px-3 py-1.5 text-[10px] uppercase tracking-wider font-semibold bg-white/[0.04] text-brand-300 rounded-full border border-white/[0.06]"
                   >
                     {cert.shortName}
                   </span>
@@ -53,12 +54,12 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Column 2: Quick Links */}
-            <div>
-              <h4 className="text-xs font-semibold uppercase tracking-[0.15em] text-gray-400 mb-5">
+            {/* Quick Links - spans 2 cols */}
+            <div className="lg:col-span-2 lg:col-start-6">
+              <h4 className="text-xs font-semibold uppercase tracking-[0.15em] text-gray-500 mb-6">
                 Quick Links
               </h4>
-              <ul className="space-y-3">
+              <ul className="space-y-3.5">
                 {quickLinks.map((link) => (
                   <li key={link.href}>
                     <Link
@@ -73,12 +74,12 @@ export default function Footer() {
               </ul>
             </div>
 
-            {/* Column 3: Business */}
-            <div>
-              <h4 className="text-xs font-semibold uppercase tracking-[0.15em] text-gray-400 mb-5">
+            {/* Business - spans 3 cols */}
+            <div className="lg:col-span-3">
+              <h4 className="text-xs font-semibold uppercase tracking-[0.15em] text-gray-500 mb-6">
                 Our Business
               </h4>
-              <ul className="space-y-3">
+              <ul className="space-y-3.5">
                 {businessLinks.map((link) => (
                   <li key={link.href}>
                     <Link
@@ -93,9 +94,9 @@ export default function Footer() {
               </ul>
             </div>
 
-            {/* Column 4: Contact */}
-            <div>
-              <h4 className="text-xs font-semibold uppercase tracking-[0.15em] text-gray-400 mb-5">
+            {/* Contact - spans 3 cols */}
+            <div className="lg:col-span-3">
+              <h4 className="text-xs font-semibold uppercase tracking-[0.15em] text-gray-500 mb-6">
                 Get in Touch
               </h4>
               <ul className="space-y-4">
@@ -127,13 +128,13 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-white/[0.06]">
-          <div className="container-main py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="border-t border-white/[0.05]">
+          <div className="container-main py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
             <p className="text-xs text-gray-500">
               © {new Date().getFullYear()} Trubeca Lifesciences Pvt. Ltd. All rights reserved.
             </p>
             <p className="text-xs text-gray-600">
-              Quality Healthcare Products Across India
+              Trusted Pharmaceutical Excellence Across India
             </p>
           </div>
         </div>

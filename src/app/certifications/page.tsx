@@ -1,233 +1,129 @@
-import type { Metadata } from "next";
+"use client";
+
 import Link from "next/link";
-import {
-  Shield,
-  Award,
-  CheckCircle2,
-  FileCheck,
-  ArrowRight,
-  BadgeCheck,
-  Sparkles,
-} from "lucide-react";
-import { Reveal, StaggerChildren, StaggerItem, GradientText } from "@/components/ui/animations";
+import { ArrowRight, Shield, CheckCircle2, Award } from "lucide-react";
+import { Reveal, StaggerChildren, StaggerItem, GradientText, TiltCard } from "@/components/ui/animations";
 import company from "@/data/company.json";
-
-export const metadata: Metadata = {
-  title: "Certifications & Quality Assurance",
-  description:
-    "Trubeca Life Sciences holds ISO 9001:2015, WHO-GMP, FSSAI, and DCGI certifications. Learn about our commitment to pharmaceutical quality and safety.",
-};
-
-const certifications = [
-  {
-    name: "ISO 9001:2015",
-    icon: Award,
-    description:
-      "International standard for Quality Management Systems, ensuring consistent quality in all our processes from manufacturing to delivery.",
-    benefits: [
-      "Standardized quality processes",
-      "Continuous improvement framework",
-      "Customer satisfaction focus",
-      "Risk-based thinking approach",
-    ],
-  },
-  {
-    name: "WHO-GMP",
-    icon: Shield,
-    description:
-      "World Health Organization Good Manufacturing Practice certification ensures our manufacturing facility meets international pharmaceutical production standards.",
-    benefits: [
-      "International manufacturing standards",
-      "Controlled production environment",
-      "Validated manufacturing processes",
-      "Comprehensive documentation",
-    ],
-  },
-  {
-    name: "FSSAI",
-    icon: FileCheck,
-    description:
-      "Food Safety and Standards Authority of India certification for our food supplement and nutraceutical product lines.",
-    benefits: [
-      "Food safety compliance",
-      "Hygienic manufacturing",
-      "Safe ingredient sourcing",
-      "Regular safety audits",
-    ],
-  },
-  {
-    name: "DCGI Approved",
-    icon: BadgeCheck,
-    description:
-      "All our products are approved by the Drug Controller General of India, the national regulatory body for pharmaceuticals.",
-    benefits: [
-      "Regulatory compliance",
-      "Product safety assurance",
-      "Legal manufacturing license",
-      "Periodic regulatory inspections",
-    ],
-  },
-];
-
-const qualityPillars = [
-  {
-    title: "Raw Material Testing",
-    description:
-      "Every batch of raw materials undergoes rigorous testing in our QC lab before being approved for production.",
-  },
-  {
-    title: "In-Process Quality Checks",
-    description:
-      "Multiple quality checkpoints during manufacturing ensure consistency and adherence to specifications.",
-  },
-  {
-    title: "Finished Product Analysis",
-    description:
-      "Comprehensive analysis of finished products including assay, dissolution, disintegration, and stability testing.",
-  },
-  {
-    title: "Stability Studies",
-    description:
-      "Long-term and accelerated stability studies ensure product efficacy throughout the shelf life.",
-  },
-  {
-    title: "Clean Room Manufacturing",
-    description:
-      "Temperature and humidity-controlled clean rooms with HEPA filtration for contamination-free production.",
-  },
-  {
-    title: "Batch Traceability",
-    description:
-      "Complete traceability for every batch — from raw material receipt to finished product dispatch.",
-  },
-];
 
 export default function CertificationsPage() {
   return (
     <>
-      {/* ─── Page Header ─── */}
+      {/* ── Hero ── */}
       <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden bg-navy-950">
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-navy-950 via-navy-900 to-brand-900" />
-          <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-trust-green/10 rounded-full blur-[120px]" />
-        </div>
+        <div className="absolute inset-0 bg-gradient-to-br from-navy-950 via-navy-900 to-brand-900/80" />
+        <div className="absolute top-1/3 right-0 w-[500px] h-[500px] bg-accent-emerald/[0.07] rounded-full blur-[150px]" />
         <div className="container-main relative z-10">
           <Reveal>
-            <span className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium uppercase tracking-wider bg-white/5 text-white/70 rounded-full border border-white/10">
-              <Sparkles className="w-3.5 h-3.5" />
-              Quality & Trust
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-white/60 bg-white/[0.04] rounded-full border border-white/[0.08]">
+              <Shield className="w-3.5 h-3.5" /> Quality Assurance
             </span>
-            <h1 className="mt-6 text-display-sm md:text-display-lg text-white text-balance">
-              Certifications & <GradientText>Quality</GradientText>
+            <h1 className="mt-6 text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-[-0.03em] leading-[1.05] font-display">
+              Our <span className="text-gradient">Certifications</span>
             </h1>
-            <p className="mt-4 text-lg text-white/50 max-w-2xl">
-              Our commitment to quality is backed by internationally recognized certifications and rigorous quality processes.
+            <p className="mt-5 text-lg text-white/40 max-w-xl">
+              Internationally recognized quality certifications ensuring the highest standards in pharmaceutical manufacturing.
             </p>
           </Reveal>
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white to-transparent" />
       </section>
 
-      {/* ─── Certification Cards ─── */}
+      {/* ── Certifications Grid ── */}
       <section className="section-padding">
         <div className="container-main">
           <Reveal>
-            <div className="text-center max-w-2xl mx-auto">
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-brand-600 bg-brand-50 rounded-full">
-                Our Certifications
-              </span>
-              <h2 className="mt-5 text-display-sm md:text-display text-balance">
-                Internationally Certified <GradientText>Quality</GradientText>
+            <div className="text-center max-w-2xl mx-auto mb-14">
+              <h2 className="text-3xl sm:text-4xl font-extrabold tracking-[-0.02em] font-display">
+                Quality You Can <span className="text-gradient italic">Trust</span>
               </h2>
               <p className="mt-4 text-gray-500 text-lg">
-                We hold multiple certifications that validate our commitment to pharmaceutical excellence.
+                Every product we manufacture meets the highest quality and safety standards in the industry.
               </p>
             </div>
           </Reveal>
-          <StaggerChildren className="mt-14 grid md:grid-cols-2 gap-6" staggerDelay={0.1}>
-            {certifications.map((cert) => (
-              <StaggerItem key={cert.name}>
-                <div className="p-6 md:p-8 bg-white rounded-2xl border border-gray-100 shadow-card hover:shadow-card-hover transition-all duration-500">
-                  <div className="flex items-center gap-3 mb-5">
-                    <div className="w-12 h-12 rounded-xl bg-brand-50 flex items-center justify-center">
-                      <cert.icon className="w-6 h-6 text-brand-500" />
+          <StaggerChildren className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto" staggerDelay={0.1}>
+            {company.certifications.map((cert) => (
+              <StaggerItem key={cert.shortName}>
+                <TiltCard>
+                  <div className="group p-8 bg-white rounded-2xl border border-gray-100 shadow-card hover:shadow-card-hover transition-all duration-500">
+                    <div className="flex items-start gap-5">
+                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-500 to-brand-600 flex items-center justify-center shadow-lg shadow-brand-500/20 shrink-0">
+                        <span className="text-white font-extrabold text-sm font-display">{cert.shortName}</span>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-navy-900 font-display">{cert.name}</h3>
+                        <p className="mt-2 text-sm text-gray-500 leading-relaxed">{cert.description}</p>
+                      </div>
                     </div>
-                    <h3 className="text-xl font-bold text-navy-900">{cert.name}</h3>
+                    {/* Certificate image placeholder */}
+                    <div className="mt-6 aspect-[16/9] bg-gradient-to-br from-gray-50 to-brand-50/30 rounded-xl flex items-center justify-center border border-gray-100">
+                      <div className="text-center">
+                        <Award className="w-8 h-8 text-brand-200 mx-auto" />
+                        <p className="mt-2 text-xs text-gray-400">Certificate Image</p>
+                      </div>
+                    </div>
                   </div>
-                  <p className="text-gray-500 text-sm leading-relaxed mb-5">
-                    {cert.description}
-                  </p>
-                  <ul className="space-y-2.5">
-                    {cert.benefits.map((b) => (
-                      <li key={b} className="flex items-center gap-3 text-sm text-gray-600">
-                        <CheckCircle2 className="w-4 h-4 text-trust-green shrink-0" />
-                        {b}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                </TiltCard>
               </StaggerItem>
             ))}
           </StaggerChildren>
         </div>
       </section>
 
-      {/* ─── Quality Pillars ─── */}
+      {/* ── Quality Commitment ── */}
       <section className="section-padding bg-gray-50/50">
         <div className="container-main">
-          <Reveal>
-            <div className="text-center max-w-2xl mx-auto">
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-brand-600 bg-brand-50 rounded-full">
-                Quality Assurance
-              </span>
-              <h2 className="mt-5 text-display-sm md:text-display text-balance">
-                Our Quality <GradientText>Process</GradientText>
-              </h2>
-              <p className="mt-4 text-gray-500 text-lg">
-                Quality is not just a certification — it&apos;s embedded in every step of our operations.
-              </p>
-            </div>
-          </Reveal>
-          <StaggerChildren className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-6" staggerDelay={0.08}>
-            {qualityPillars.map((pillar, i) => (
-              <StaggerItem key={i}>
-                <div className="p-6 md:p-8 bg-white rounded-2xl border border-gray-100 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-500">
-                  <div className="w-10 h-10 rounded-xl bg-navy-900 text-brand-400 flex items-center justify-center text-sm font-bold">
-                    {String(i + 1).padStart(2, "0")}
+          <div className="max-w-3xl mx-auto">
+            <Reveal>
+              <div className="text-center">
+                <h2 className="text-3xl font-extrabold tracking-[-0.02em] font-display">
+                  Our Quality <span className="text-gradient italic">Commitment</span>
+                </h2>
+                <p className="mt-6 text-gray-500 leading-relaxed">
+                  At Trubeca Lifesciences, quality is not just a standard — it is our foundation. Every product undergoes rigorous multi-stage testing, from raw material sourcing to final packaging.
+                </p>
+              </div>
+            </Reveal>
+            <StaggerChildren className="mt-10 grid sm:grid-cols-2 gap-4" staggerDelay={0.08}>
+              {[
+                "Raw material testing & verification",
+                "In-process quality checks at every stage",
+                "Finished product analysis & testing",
+                "Stability testing for shelf life assurance",
+                "Microbiology & sterility testing",
+                "Compliance with pharmacopeia standards",
+                "Regular facility audits & inspections",
+                "Continuous process improvement",
+              ].map((item) => (
+                <StaggerItem key={item}>
+                  <div className="flex items-center gap-3 p-4 bg-white rounded-xl border border-gray-100">
+                    <CheckCircle2 className="w-5 h-5 text-accent-emerald shrink-0" />
+                    <span className="text-sm text-gray-700">{item}</span>
                   </div>
-                  <h3 className="mt-5 font-semibold text-navy-900">{pillar.title}</h3>
-                  <p className="mt-3 text-sm text-gray-500 leading-relaxed">{pillar.description}</p>
-                </div>
-              </StaggerItem>
-            ))}
-          </StaggerChildren>
+                </StaggerItem>
+              ))}
+            </StaggerChildren>
+          </div>
         </div>
       </section>
 
-      {/* ─── CTA ─── */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-brand-600 via-brand-500 to-accent-cyan" />
-        <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`, backgroundSize: "40px 40px" }} />
-        <div className="container-main relative z-10 py-20 md:py-28 text-center">
+      {/* ── CTA ── */}
+      <section className="relative py-20 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-navy-950 to-brand-900" />
+        <div className="container-main relative z-10 text-center">
           <Reveal>
-            <h2 className="text-display-sm md:text-display text-white text-balance">
-              Quality You Can Trust
+            <h2 className="text-3xl font-extrabold text-white font-display">
+              Partner with a Quality-First Company
             </h2>
-            <p className="mt-5 text-lg text-white/70 max-w-2xl mx-auto">
-              Partner with a certified pharmaceutical company that puts quality and safety above everything else.
+            <p className="mt-3 text-white/50 max-w-md mx-auto">
+              Experience the Trubeca difference in pharmaceutical manufacturing and distribution.
             </p>
-            <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/products"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-white text-brand-600 font-semibold rounded-full hover:bg-gray-50 transition-all duration-300 shadow-xl"
-              >
-                Explore Products <ArrowRight className="w-4 h-4" />
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link href="/contact" className="btn-primary">
+                Contact Us <ArrowRight className="w-4 h-4" />
               </Link>
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 px-8 py-4 border-2 border-white/25 text-white font-semibold rounded-full hover:bg-white/10 hover:border-white/40 transition-all duration-300"
-              >
-                Contact Us
+              <Link href="/products" className="btn-ghost">
+                View Products
               </Link>
             </div>
           </Reveal>

@@ -12,7 +12,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       href={`/products/${product.slug}`}
       className="group flex flex-col h-full p-4 sm:p-5 bg-white rounded-2xl border border-gray-100 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-500"
     >
-      {/* Image placeholder */}
+      {/* Image */}
       <div className="relative aspect-square bg-gradient-to-br from-gray-50 to-brand-50/50 rounded-xl mb-4 flex items-center justify-center overflow-hidden">
         <Pill className="w-10 h-10 sm:w-12 sm:h-12 text-brand-200 group-hover:text-brand-400 group-hover:scale-110 transition-all duration-500" />
         <div className="absolute top-2.5 right-2.5">
@@ -21,10 +21,9 @@ export default function ProductCard({ product }: ProductCardProps) {
           </span>
         </div>
       </div>
-
       {/* Info */}
       <div className="flex-1 flex flex-col">
-        <h3 className="text-sm sm:text-base font-semibold text-navy-900 group-hover:text-brand-600 transition-colors leading-snug">
+        <h3 className="text-sm sm:text-base font-bold text-navy-900 group-hover:text-brand-600 transition-colors leading-snug font-display">
           {product.brandName}
         </h3>
         <p className="mt-1.5 text-xs sm:text-sm text-gray-400 line-clamp-2 flex-1 leading-relaxed">

@@ -1,32 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { useRef, useState } from "react";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import {
-  ArrowRight,
-  Shield,
-  Truck,
-  Award,
-  Users,
-  FlaskConical,
-  Pill,
-  Stethoscope,
-  Heart,
-  Syringe,
-  Droplets,
-  Baby,
-  CheckCircle2,
-  Sparkles,
-  TrendingUp,
-  Globe,
+  ArrowRight, Shield, Award, Users, FlaskConical, Pill,
+  Stethoscope, Heart, Syringe, Droplets, Baby, CheckCircle2,
+  TrendingUp, Factory, Handshake, MapPin, Star, Quote,
+  Package, Sparkles, Play, ChevronRight, Microscope,
 } from "lucide-react";
 import {
-  Reveal,
-  StaggerChildren,
-  StaggerItem,
-  AnimatedCounter,
-  GradientText,
-  MagneticButton,
+  Reveal, StaggerChildren, StaggerItem, AnimatedCounter,
+  GradientText, TiltCard, MagneticButton, Parallax,
 } from "@/components/ui/animations";
 import company from "@/data/company.json";
 import categoriesData from "@/data/categories.json";
@@ -41,604 +26,842 @@ const categoryIcons: Record<string, React.ReactNode> = {
   supplements: <Stethoscope className="w-6 h-6" />,
 };
 
+const trustMessages = [
+  "ISO 9001:2015 Certified Manufacturing",
+  "118+ WHO-GMP Pharmaceutical Products",
+  "500+ Distribution Partners Nationwide",
+  "10+ Years of Pharmaceutical Excellence",
+  "FSSAI & DCGI Approved Products",
+  "Monopoly Rights PCD Franchise",
+  "Pan-India Distribution Network",
+  "Quality Assured Third-Party Manufacturing",
+];
+
+const testimonials = [
+  {
+    name: "Rajesh Kumar",
+    role: "PCD Franchise Partner, Uttar Pradesh",
+    text: "Trubeca Lifesciences delivers premium-quality PCD products and always ensures timely dispatch. Their team is cooperative and transparent — highly recommended!",
+    rating: 5,
+  },
+  {
+    name: "Dr. Priya Sharma",
+    role: "Healthcare Provider, Rajasthan",
+    text: "We have been sourcing pharmaceutical products from Trubeca for over 3 years. The quality is consistent and the range covers all our requirements.",
+    rating: 5,
+  },
+  {
+    name: "Amit Verma",
+    role: "Distribution Partner, Punjab",
+    text: "The monopoly rights and marketing support from Trubeca have been instrumental in growing my business. Their products sell on trust.",
+    rating: 4,
+  },
+  {
+    name: "Sunita Devi",
+    role: "Franchise Partner, Haryana",
+    text: "Starting my pharma business with Trubeca was the best decision. Low investment, great margins, and a brand that customers trust.",
+    rating: 5,
+  },
+];
+
+const whyChooseUs = [
+  {
+    num: "01",
+    title: "Your Trusted Partner for PCD Pharma Franchise",
+    desc: "Monopoly-based distribution rights with complete marketing support, high-quality products, and a trusted pharmaceutical brand backing your growth.",
+  },
+  {
+    num: "02",
+    title: "Extensive Range of WHO-GMP Certified Products",
+    desc: "118+ pharmaceutical formulations across 7 therapeutic categories — tablets, capsules, syrups, injections, and specialty products.",
+  },
+  {
+    num: "03",
+    title: "Transparent, Ethical & Customer-Focused Approach",
+    desc: "We believe in building long-term partnerships through ethical business practices, transparent pricing, and dedicated support.",
+  },
+  {
+    num: "04",
+    title: "Reliable Third-Party Manufacturing with Timely Delivery",
+    desc: "State-of-the-art manufacturing facilities ensuring quality, consistency, and on-time delivery for all contract manufacturing orders.",
+  },
+];
+
 export default function HomePage() {
   return (
     <>
-      {/* ─── Hero Section ─── */}
-      <section className="relative min-h-screen flex items-center overflow-hidden bg-[#0a0f1a]">
-        {/* Subtle background */}
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0a0f1a] via-[#0d1424] to-[#0a1628]" />
-          {/* Very subtle radial glow */}
-          <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[700px] h-[700px] bg-white/[0.015] rounded-full blur-[120px]" />
-          {/* Dot grid */}
-          <div 
-            className="absolute inset-0 opacity-[0.04]"
-            style={{
-              backgroundImage: `radial-gradient(circle, rgba(255,255,255,0.4) 1px, transparent 1px)`,
-              backgroundSize: "40px 40px",
-            }}
-          />
-        </div>
+      <HeroSection />
+      <TrustMarquee />
+      <AboutPreview />
+      <StatsSection />
+      <ServicesSection />
+      <WhyChooseSection />
+      <CategoriesSection />
+      <TestimonialsSection />
+      <ManufacturingSection />
+      <CTASection />
+    </>
+  );
+}
 
-        {/* Content */}
-        <div className="container-main relative z-10 pt-32 pb-20 lg:pt-40 lg:pb-24">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Left - Text Content */}
-            <div>
-              {/* Badge */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
-                <span className="inline-flex items-center gap-2 px-4 py-1.5 text-[11px] font-medium uppercase tracking-wider text-white/50 rounded-full border border-white/[0.08]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                  ISO 9001:2015 & WHO-GMP Certified
-                </span>
-              </motion.div>
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   1. HERO — Cinematic, video-ready
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+function HeroSection() {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const bgY = useTransform(scrollYProgress, [0, 1], [0, 150]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
-              {/* Headline */}
-              <motion.h1
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                className="mt-8 text-[2rem] md:text-[2.75rem] lg:text-[3.25rem] leading-[1.15] font-semibold text-white/95 tracking-[-0.02em]"
-              >
-                Redefining{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-200">Pharmaceutical</span>{" "}
-                Excellence
-              </motion.h1>
+  return (
+    <section ref={ref} className="relative min-h-screen flex items-center overflow-hidden bg-navy-950">
+      {/* Video / Image background layer */}
+      <motion.div className="absolute inset-0" style={{ y: bgY }}>
+        {/* Hero video */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/videos/hero-lab.mp4" type="video/mp4" />
+        </video>
+      </motion.div>
 
-              {/* Subtitle */}
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.6 }}
-                className="mt-5 text-[15px] md:text-base text-white/40 max-w-md leading-[1.7] font-normal tracking-wide"
-              >
-                Empowering healthcare with 118+ certified pharmaceutical products. 
-                Your trusted partner for PCD Franchise & Contract Manufacturing across India.
-              </motion.p>
+      {/* Dot grid pattern */}
+      <div
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px)",
+          backgroundSize: "48px 48px",
+        }}
+      />
 
-              {/* CTA Buttons */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.8 }}
-                className="mt-10 flex flex-col sm:flex-row gap-3"
-              >
-                <Link
-                  href="/products"
-                  className="group inline-flex items-center gap-2 px-7 py-3.5 text-sm font-medium bg-white text-[#0a0f1a] rounded-full hover:bg-white/90 transition-all duration-300"
-                >
-                  Explore Products
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-                </Link>
-                <Link
-                  href="/pcd-pharma-franchise"
-                  className="inline-flex items-center gap-2 px-7 py-3.5 text-sm font-medium text-white/70 rounded-full border border-white/[0.12] hover:bg-white/[0.04] hover:border-white/20 transition-all duration-300"
-                >
-                  Become a Partner
-                </Link>
-              </motion.div>
+      {/* Gradient overlay for video readiness */}
+      <div className="absolute inset-0 bg-gradient-to-t from-navy-950/90 via-navy-950/50 to-navy-950/70" />
 
-              {/* Trust indicators */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.8, delay: 1.2 }}
-                className="mt-14 flex flex-wrap items-center gap-5"
-              >
-                {["ISO 9001:2015", "WHO-GMP", "FSSAI", "DCGI"].map((cert) => (
-                  <div key={cert} className="flex items-center gap-1.5 text-white/25">
-                    <Shield className="w-3.5 h-3.5" />
-                    <span className="text-[11px] font-medium tracking-wide">{cert}</span>
-                  </div>
-                ))}
-              </motion.div>
-            </div>
+      {/* Content */}
+      <motion.div className="container-main relative z-10 pt-32 pb-20 lg:pt-40 lg:pb-28" style={{ opacity }}>
+        <div className="max-w-4xl mx-auto text-center">
+          {/* Certification badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            <span className="inline-flex items-center gap-2.5 px-5 py-2 text-[11px] font-semibold uppercase tracking-[0.15em] text-white/60 rounded-full border border-white/[0.08] bg-white/[0.03] backdrop-blur-sm">
+              <span className="w-2 h-2 rounded-full bg-accent-emerald animate-pulse" />
+              ISO 9001:2015 & WHO-GMP Certified
+            </span>
+          </motion.div>
 
-            {/* Right - Refined Lab Illustration */}
-            <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1.2, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="hidden lg:flex items-center justify-center relative"
-            >
-              <div className="relative w-full max-w-[480px] aspect-square">
-                {/* Subtle glow */}
-                <div className="absolute inset-[15%] bg-blue-500/[0.06] rounded-full blur-[60px]" />
-                
-                <svg viewBox="0 0 500 500" className="w-full h-full relative z-10" xmlns="http://www.w3.org/2000/svg">
-                  <defs>
-                    <linearGradient id="line-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="rgba(255,255,255,0.6)" />
-                      <stop offset="100%" stopColor="rgba(255,255,255,0.2)" />
-                    </linearGradient>
-                    <linearGradient id="fill-grad" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stopColor="rgba(147,197,253,0.3)" />
-                      <stop offset="100%" stopColor="rgba(147,197,253,0.08)" />
-                    </linearGradient>
-                    <linearGradient id="fill-grad2" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stopColor="rgba(167,139,250,0.25)" />
-                      <stop offset="100%" stopColor="rgba(167,139,250,0.05)" />
-                    </linearGradient>
-                  </defs>
+          {/* Main headline */}
+          <motion.h1
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-8 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-[-0.03em] leading-[1.05] font-display"
+          >
+            Redefining{" "}
+            <span className="text-gradient">Pharmaceutical</span>
+            <br />
+            Excellence
+          </motion.h1>
 
-                  {/* === ERLENMEYER FLASK (main, left-center) === */}
-                  <g>
-                    <path d="M155,120 L155,220 L105,330 C100,342 108,355 122,355 L228,355 C242,355 250,342 245,330 L195,220 L195,120" 
-                      fill="none" stroke="rgba(255,255,255,0.35)" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-                    <line x1="148" y1="120" x2="202" y2="120" stroke="rgba(255,255,255,0.4)" strokeWidth="1.8" strokeLinecap="round" />
-                    {/* Liquid */}
-                    <path d="M120,300 Q150,293 175,298 Q200,303 230,296 L228,355 C242,355 250,342 245,330 L230,296 L120,300 L105,330 C100,342 108,355 122,355 L228,355" 
-                      fill="url(#fill-grad)" />
-                    {/* Subtle bubbles */}
-                    <circle cx="155" cy="330" r="2.5" fill="rgba(255,255,255,0.25)">
-                      <animate attributeName="cy" values="335;305;280" dur="4s" repeatCount="indefinite" />
-                      <animate attributeName="opacity" values="0.3;0.15;0" dur="4s" repeatCount="indefinite" />
-                    </circle>
-                    <circle cx="180" cy="340" r="2" fill="rgba(255,255,255,0.2)">
-                      <animate attributeName="cy" values="340;310;285" dur="3.5s" repeatCount="indefinite" begin="1.2s" />
-                      <animate attributeName="opacity" values="0.25;0.12;0" dur="3.5s" repeatCount="indefinite" begin="1.2s" />
-                    </circle>
-                    {/* Vapor */}
-                    <circle cx="168" cy="110" r="3" fill="rgba(255,255,255,0)">
-                      <animate attributeName="cy" values="115;95;75" dur="5s" repeatCount="indefinite" />
-                      <animate attributeName="opacity" values="0;0.08;0" dur="5s" repeatCount="indefinite" />
-                      <animate attributeName="r" values="2;4;6" dur="5s" repeatCount="indefinite" />
-                    </circle>
-                    <circle cx="182" cy="110" r="2" fill="rgba(255,255,255,0)">
-                      <animate attributeName="cy" values="115;90;65" dur="4.5s" repeatCount="indefinite" begin="1.5s" />
-                      <animate attributeName="opacity" values="0;0.06;0" dur="4.5s" repeatCount="indefinite" begin="1.5s" />
-                      <animate attributeName="r" values="1.5;3;5" dur="4.5s" repeatCount="indefinite" begin="1.5s" />
-                    </circle>
-                  </g>
+          {/* Subtitle */}
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+            className="mt-6 text-base sm:text-lg text-white/40 max-w-2xl mx-auto leading-relaxed"
+          >
+            Empowering healthcare with 118+ certified products. Your trusted partner
+            for PCD Pharma Franchise & Third-Party Manufacturing across India.
+          </motion.p>
 
-                  {/* === BEAKER (right) === */}
-                  <g>
-                    <rect x="310" y="175" width="100" height="140" rx="4" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth="1.4" />
-                    <path d="M310,180 L298,168" fill="none" stroke="rgba(255,255,255,0.25)" strokeWidth="1.2" strokeLinecap="round" />
-                    {/* Measurement lines */}
-                    <line x1="315" y1="210" x2="328" y2="210" stroke="rgba(255,255,255,0.15)" strokeWidth="0.8" />
-                    <line x1="315" y1="240" x2="328" y2="240" stroke="rgba(255,255,255,0.15)" strokeWidth="0.8" />
-                    <line x1="315" y1="270" x2="328" y2="270" stroke="rgba(255,255,255,0.15)" strokeWidth="0.8" />
-                    {/* Liquid */}
-                    <rect x="312" y="258" width="96" height="55" rx="2" fill="url(#fill-grad2)" />
-                    {/* Bubble */}
-                    <circle cx="350" cy="295" r="1.5" fill="rgba(255,255,255,0.1)">
-                      <animate attributeName="cy" values="300;278;260" dur="3.2s" repeatCount="indefinite" />
-                      <animate attributeName="opacity" values="0.12;0.06;0" dur="3.2s" repeatCount="indefinite" />
-                    </circle>
-                  </g>
-
-                  {/* === TEST TUBES (upper center-right) === */}
-                  <g>
-                    <rect x="280" y="60" width="14" height="72" rx="7" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth="1.2" />
-                    <rect x="282" y="90" width="10" height="40" rx="5" fill="url(#fill-grad)" />
-                    
-                    <rect x="302" y="68" width="14" height="68" rx="7" fill="none" stroke="rgba(255,255,255,0.25)" strokeWidth="1.2" />
-                    <rect x="304" y="95" width="10" height="39" rx="5" fill="url(#fill-grad2)" />
-                    
-                    <rect x="324" y="63" width="14" height="70" rx="7" fill="none" stroke="rgba(255,255,255,0.28)" strokeWidth="1.2" />
-                    <rect x="326" y="92" width="10" height="39" rx="5" fill="url(#fill-grad)" opacity="0.8" />
-                    {/* Rack */}
-                    <line x1="272" y1="60" x2="346" y2="60" stroke="rgba(255,255,255,0.2)" strokeWidth="1.8" strokeLinecap="round" />
-                  </g>
-
-                  {/* === CONVEYOR / PRODUCTION LINE === */}
-                  <g>
-                    <line x1="50" y1="400" x2="450" y2="400" stroke="rgba(255,255,255,0.15)" strokeWidth="1.2" />
-                    <line x1="50" y1="410" x2="450" y2="410" stroke="rgba(255,255,255,0.1)" strokeWidth="1" />
-                    {/* Moving dashes */}
-                    <line x1="50" y1="405" x2="450" y2="405" stroke="rgba(255,255,255,0.1)" strokeWidth="0.6" strokeDasharray="6 4">
-                      <animate attributeName="stroke-dashoffset" values="0;-10" dur="0.8s" repeatCount="indefinite" />
-                    </line>
-                    
-                    {/* Capsules moving */}
-                    <rect y="390" width="28" height="10" rx="5" fill="none" stroke="rgba(255,255,255,0.35)" strokeWidth="1">
-                      <animate attributeName="x" values="-30;480" dur="10s" repeatCount="indefinite" />
-                    </rect>
-                    <rect y="390" width="28" height="10" rx="5" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth="1">
-                      <animate attributeName="x" values="-30;480" dur="10s" repeatCount="indefinite" begin="2.5s" />
-                    </rect>
-                    <rect y="390" width="28" height="10" rx="5" fill="none" stroke="rgba(255,255,255,0.32)" strokeWidth="1">
-                      <animate attributeName="x" values="-30;480" dur="10s" repeatCount="indefinite" begin="5s" />
-                    </rect>
-                    <rect y="390" width="28" height="10" rx="5" fill="none" stroke="rgba(255,255,255,0.25)" strokeWidth="1">
-                      <animate attributeName="x" values="-30;480" dur="10s" repeatCount="indefinite" begin="7.5s" />
-                    </rect>
-                  </g>
-
-                  {/* === MOLECULAR STRUCTURE (center, slow spin) === */}
-                  <g className="animate-[spin_50s_linear_infinite]" style={{ transformOrigin: "260px 250px" }}>
-                    <polygon points="260,210 290,225 290,255 260,270 230,255 230,225" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="1" />
-                    {/* Bonds */}
-                    <line x1="260" y1="210" x2="260" y2="195" stroke="rgba(255,255,255,0.14)" strokeWidth="0.8" />
-                    <line x1="290" y1="225" x2="303" y2="218" stroke="rgba(255,255,255,0.14)" strokeWidth="0.8" />
-                    <line x1="290" y1="255" x2="303" y2="262" stroke="rgba(255,255,255,0.14)" strokeWidth="0.8" />
-                    <line x1="260" y1="270" x2="260" y2="285" stroke="rgba(255,255,255,0.14)" strokeWidth="0.8" />
-                    <line x1="230" y1="255" x2="217" y2="262" stroke="rgba(255,255,255,0.14)" strokeWidth="0.8" />
-                    <line x1="230" y1="225" x2="217" y2="218" stroke="rgba(255,255,255,0.14)" strokeWidth="0.8" />
-                    {/* Nodes */}
-                    <circle cx="260" cy="210" r="3" fill="rgba(255,255,255,0.25)" />
-                    <circle cx="290" cy="225" r="3" fill="rgba(255,255,255,0.2)" />
-                    <circle cx="290" cy="255" r="3" fill="rgba(255,255,255,0.2)" />
-                    <circle cx="260" cy="270" r="3" fill="rgba(255,255,255,0.25)" />
-                    <circle cx="230" cy="255" r="3" fill="rgba(255,255,255,0.2)" />
-                    <circle cx="230" cy="225" r="3" fill="rgba(255,255,255,0.2)" />
-                    <circle cx="260" cy="195" r="2" fill="rgba(255,255,255,0.15)" />
-                    <circle cx="303" cy="218" r="2" fill="rgba(255,255,255,0.15)" />
-                    <circle cx="303" cy="262" r="2" fill="rgba(255,255,255,0.15)" />
-                  </g>
-
-                  {/* === PIPETTE (top right) === */}
-                  <g>
-                    <rect x="400" y="80" width="10" height="45" rx="2" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth="1.2" />
-                    <path d="M403,125 L403,140 Q405,148 407,140 L407,125" fill="none" stroke="rgba(255,255,255,0.25)" strokeWidth="1" />
-                    <rect x="397" y="75" width="16" height="8" rx="2" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="1.2" />
-                    {/* Liquid */}
-                    <rect x="402" y="100" width="6" height="20" rx="1" fill="url(#fill-grad)" opacity="0.5" />
-                    {/* Drop */}
-                    <circle cx="405" cy="150" r="2" fill="rgba(255,255,255,0)">
-                      <animate attributeName="cy" values="148;168;188" dur="3s" repeatCount="indefinite" />
-                      <animate attributeName="opacity" values="0.2;0.12;0" dur="3s" repeatCount="indefinite" />
-                    </circle>
-                  </g>
-
-                  {/* === MICROSCOPE (bottom right, minimal) === */}
-                  <g opacity="0.8">
-                    <rect x="400" y="420" width="50" height="5" rx="2.5" fill="none" stroke="rgba(255,255,255,0.18)" strokeWidth="1" />
-                    <rect x="418" y="380" width="14" height="40" rx="2" fill="none" stroke="rgba(255,255,255,0.18)" strokeWidth="1" />
-                    <circle cx="425" cy="375" r="8" fill="none" stroke="rgba(255,255,255,0.22)" strokeWidth="1" />
-                    <line x1="425" y1="367" x2="425" y2="352" stroke="rgba(255,255,255,0.18)" strokeWidth="1" strokeLinecap="round" />
-                    <circle cx="425" cy="348" r="3.5" fill="none" stroke="rgba(255,255,255,0.15)" strokeWidth="0.8" />
-                  </g>
-
-                  {/* === SUBTLE FLOATING PARTICLES === */}
-                  <circle cx="100" cy="80" r="1.5" fill="rgba(255,255,255,0.08)">
-                    <animate attributeName="cy" values="80;65;80" dur="6s" repeatCount="indefinite" />
-                  </circle>
-                  <circle cx="430" cy="150" r="1" fill="rgba(255,255,255,0.06)">
-                    <animate attributeName="cy" values="150;135;150" dur="5s" repeatCount="indefinite" begin="1s" />
-                  </circle>
-                  <circle cx="80" cy="440" r="1" fill="rgba(255,255,255,0.06)">
-                    <animate attributeName="cy" values="440;428;440" dur="4.5s" repeatCount="indefinite" begin="2s" />
-                  </circle>
-
-                  {/* === CONNECTING LINES (circuit-like) === */}
-                  <g opacity="0.12">
-                    <path d="M175,355 L175,400" stroke="white" strokeWidth="0.5" />
-                    <path d="M245,330 L245,355 L310,355 L310,315" stroke="white" strokeWidth="0.5" fill="none" />
-                    <path d="M340,60 L340,175" stroke="white" strokeWidth="0.5" strokeDasharray="3 5" />
-                    <circle cx="175" cy="400" r="2" fill="white" />
-                    <circle cx="310" cy="315" r="2" fill="white" />
-                  </g>
-                </svg>
-
-                {/* Single subtle orbit ring */}
-                <div className="absolute inset-[-30px] border border-white/[0.025] rounded-full animate-[spin_60s_linear_infinite]">
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-white/20 rounded-full" />
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-
-        {/* Bottom gradient fade */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent" />
-      </section>
-
-      {/* ─── Stats Section ─── */}
-      <section className="relative -mt-16 z-20">
-        <div className="container-main">
-          <Reveal>
-            <div className="glass-card p-8 md:p-12">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
-                {[
-                  { value: 118, suffix: "+", label: "Products", icon: <Pill className="w-5 h-5" /> },
-                  { value: 500, suffix: "+", label: "Distribution Partners", icon: <Users className="w-5 h-5" /> },
-                  { value: 10, suffix: "+", label: "Years Experience", icon: <Award className="w-5 h-5" /> },
-                  { value: 7, suffix: "", label: "Product Categories", icon: <FlaskConical className="w-5 h-5" /> },
-                ].map((stat) => (
-                  <div key={stat.label} className="text-center">
-                    <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-50 text-brand-500 mb-3">
-                      {stat.icon}
-                    </div>
-                    <p className="text-3xl md:text-4xl font-extrabold text-navy-900 tracking-tight">
-                      <AnimatedCounter end={stat.value} suffix={stat.suffix} />
-                    </p>
-                    <p className="mt-1 text-sm text-gray-500 font-medium">
-                      {stat.label}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ─── About Snapshot ─── */}
-      <section className="section-padding overflow-hidden">
-        <div className="container-main">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <Reveal direction="left">
-              <div>
-                <span className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-brand-600 bg-brand-50 rounded-full">
-                  <Sparkles className="w-3.5 h-3.5" />
-                  About Us
-                </span>
-                <h2 className="mt-5 text-display-sm md:text-display text-balance">
-                  Committed to Quality{" "}
-                  <GradientText>Healthcare</GradientText>
-                </h2>
-                <p className="mt-6 text-lg text-gray-500 leading-relaxed">
-                  Founded in Chandigarh over a decade ago, Trubeca Lifesciences set out with a clear mission: 
-                  make quality pharmaceutical products accessible across India.
-                </p>
-                <div className="mt-8 grid grid-cols-2 gap-4">
-                  {company.certifications.map((cert) => (
-                    <div key={cert.shortName} className="flex items-center gap-3 p-3 rounded-xl bg-gray-50 border border-gray-100">
-                      <CheckCircle2 className="w-5 h-5 text-trust-green shrink-0" />
-                      <span className="text-sm font-medium text-navy-900">{cert.shortName} Certified</span>
-                    </div>
-                  ))}
-                </div>
-                <Link
-                  href="/about"
-                  className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-brand-600 hover:text-brand-700 group"
-                >
-                  Learn More About Us
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </div>
-            </Reveal>
-
-            <Reveal direction="right" delay={0.2}>
-              <div className="relative">
-                {/* Decorative background */}
-                <div className="absolute -inset-4 bg-gradient-to-br from-brand-50 to-accent-cyan/10 rounded-3xl -rotate-2" />
-                <div className="relative aspect-[4/3] bg-gradient-to-br from-brand-100 to-brand-50 rounded-2xl flex items-center justify-center overflow-hidden">
-                  <div className="absolute inset-0 gradient-mesh opacity-60" />
-                  <FlaskConical className="w-24 h-24 text-brand-300 relative z-10" />
-                  {/* Corner accent */}
-                  <div className="absolute -bottom-2 -right-2 bg-white p-4 rounded-xl shadow-card-hover border border-gray-100">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-lg bg-trust-green/10 flex items-center justify-center">
-                        <TrendingUp className="w-5 h-5 text-trust-green" />
-                      </div>
-                      <div>
-                        <p className="text-lg font-bold text-navy-900">10+</p>
-                        <p className="text-xs text-gray-500">Years Growing</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── Product Categories ─── */}
-      <section className="section-padding bg-gray-50/50">
-        <div className="container-main">
-          <Reveal>
-            <div className="text-center max-w-2xl mx-auto">
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-brand-600 bg-brand-50 rounded-full">
-                Our Products
-              </span>
-              <h2 className="mt-5 text-display-sm md:text-display text-balance">
-                Wide Range of{" "}
-                <GradientText>Pharmaceutical</GradientText>{" "}Products
-              </h2>
-              <p className="mt-4 text-gray-500 text-lg">
-                Explore our comprehensive portfolio of WHO-GMP certified healthcare products across multiple therapeutic segments.
-              </p>
-            </div>
-          </Reveal>
-
-          <StaggerChildren className="mt-14 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6" staggerDelay={0.08}>
-            {categoriesData.categories.map((cat) => (
-              <StaggerItem key={cat.slug}>
-                <Link
-                  href={`/products?category=${cat.slug}`}
-                  className="group block p-6 bg-white rounded-2xl border border-gray-100 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-500 text-center"
-                >
-                  <div className="w-14 h-14 mx-auto rounded-2xl bg-brand-50 text-brand-500 flex items-center justify-center group-hover:bg-brand-500 group-hover:text-white group-hover:scale-110 transition-all duration-300">
-                    {categoryIcons[cat.slug] || <Pill className="w-6 h-6" />}
-                  </div>
-                  <h3 className="mt-4 font-semibold text-sm text-navy-900 group-hover:text-brand-600 transition-colors">
-                    {cat.name}
-                  </h3>
-                  <p className="mt-1 text-xs text-gray-400">{cat.productCount} Products</p>
-                </Link>
-              </StaggerItem>
-            ))}
-            <StaggerItem>
-              <Link
-                href="/products"
-                className="group block p-6 bg-gradient-to-br from-brand-500 to-brand-600 rounded-2xl shadow-card hover:shadow-glow hover:-translate-y-1 transition-all duration-500 text-center h-full flex flex-col items-center justify-center"
-              >
-                <div className="w-14 h-14 mx-auto rounded-2xl bg-white/20 text-white flex items-center justify-center group-hover:scale-110 transition-all duration-300">
-                  <ArrowRight className="w-6 h-6" />
-                </div>
-                <h3 className="mt-4 font-semibold text-sm text-white">View All Products</h3>
-                <p className="mt-1 text-xs text-white/60">{company.stats.totalProducts} Products</p>
+          {/* CTAs */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.9 }}
+            className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
+          >
+            <MagneticButton>
+              <Link href="/products" className="btn-primary text-base px-8 py-4">
+                Explore Products
+                <ArrowRight className="w-4 h-4" />
               </Link>
-            </StaggerItem>
-          </StaggerChildren>
-        </div>
-      </section>
+            </MagneticButton>
+            <MagneticButton>
+              <Link href="/contact" className="btn-ghost text-base px-8 py-4">
+                <Play className="w-4 h-4" />
+                Get In Touch
+              </Link>
+            </MagneticButton>
+          </motion.div>
 
-      {/* ─── Why Trubeca ─── */}
-      <section className="section-padding relative overflow-hidden">
-        <div className="absolute inset-0 bg-navy-950" />
-        <div className="absolute inset-0">
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-500/10 rounded-full blur-[120px]" />
-          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent-cyan/10 rounded-full blur-[100px]" />
+          {/* Floating stats at bottom of hero */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 1.2 }}
+            className="mt-16 lg:mt-24 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto"
+          >
+            {[
+              { value: 118, suffix: "+", label: "Products" },
+              { value: 10, suffix: "+", label: "Years" },
+              { value: 500, suffix: "+", label: "Partners" },
+              { value: 7, suffix: "", label: "Categories" },
+            ].map((stat) => (
+              <div key={stat.label} className="glass-dark px-4 py-5 rounded-2xl text-center">
+                <div className="text-2xl sm:text-3xl font-bold text-white font-display">
+                  <AnimatedCounter end={stat.value} suffix={stat.suffix} />
+                </div>
+                <div className="text-xs text-white/40 mt-1 uppercase tracking-wider font-medium">{stat.label}</div>
+              </div>
+            ))}
+          </motion.div>
         </div>
-        
-        <div className="container-main relative z-10">
-          <Reveal>
-            <div className="text-center max-w-2xl mx-auto">
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-brand-300 bg-white/5 rounded-full border border-white/10">
-                Why Choose Us
-              </span>
-              <h2 className="mt-5 text-display-sm md:text-display text-white text-balance">
-                The Trubeca Advantage
-              </h2>
-              <p className="mt-4 text-white/50 text-lg">
-                We stand apart with our unwavering commitment to quality, innovation, and customer success.
-              </p>
+      </motion.div>
+
+      {/* Bottom fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent z-20" />
+    </section>
+  );
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   2. TRUST MARQUEE — Infinite scrolling bar
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+function TrustMarquee() {
+  const items = [...trustMessages, ...trustMessages];
+  return (
+    <div className="relative bg-navy-950 py-4 overflow-hidden border-b border-white/[0.04]">
+      <div className="mask-gradient-r">
+        <div className="marquee-track" style={{ willChange: 'transform' }}>
+          {items.map((msg, i) => (
+            <div key={i} className="flex items-center gap-3 px-8 whitespace-nowrap">
+              <Sparkles className="w-3.5 h-3.5 text-brand-400 shrink-0" />
+              <span className="text-sm text-white/60 font-medium">{msg}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   3. ABOUT PREVIEW
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+function AboutPreview() {
+  return (
+    <section className="section-padding relative overflow-hidden">
+      <div className="container-main">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          {/* Left - Image area */}
+          <Reveal direction="left">
+            <div className="relative">
+              <TiltCard>
+                <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-premium">
+                  <img
+                    src="/images/building.png"
+                    alt="Trubeca Lifesciences Office"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </TiltCard>
+              {/* Floating experience badge */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.5, duration: 0.5 }}
+                className="absolute -bottom-6 -right-6 lg:bottom-8 lg:-right-8 bg-white rounded-2xl p-5 shadow-premium border border-gray-100"
+              >
+                <div className="text-4xl font-extrabold text-navy-900 font-display">
+                  <AnimatedCounter end={10} suffix="+" />
+                </div>
+                <div className="text-xs text-gray-500 font-semibold uppercase tracking-wider mt-1">Years Experience</div>
+                <div className="text-[11px] text-gray-400 mt-2 max-w-[160px]">
+                  Trusted expertise in PCD pharma and third-party manufacturing
+                </div>
+              </motion.div>
             </div>
           </Reveal>
 
-          <StaggerChildren className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-6" staggerDelay={0.1}>
-            {company.whyChooseUs.map((item, i) => {
-              const icons = [Shield, Award, Truck, FlaskConical, Users, Heart];
-              const Icon = icons[i % icons.length];
-              return (
-                <StaggerItem key={i}>
-                  <div className="group p-6 md:p-8 rounded-2xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-sm hover:bg-white/[0.07] hover:border-white/[0.15] transition-all duration-500">
-                    <div className="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center group-hover:scale-110 group-hover:bg-brand-500/20 transition-all duration-300">
-                      <Icon className="w-6 h-6 text-brand-400" />
-                    </div>
-                    <h3 className="mt-5 font-semibold text-lg text-white">{item.title}</h3>
-                    <p className="mt-3 text-sm text-white/50 leading-relaxed">{item.description}</p>
-                  </div>
-                </StaggerItem>
-              );
-            })}
-          </StaggerChildren>
-        </div>
-      </section>
+          {/* Right - Text */}
+          <Reveal direction="right" delay={0.2}>
+            <div>
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-brand-600 bg-brand-50 rounded-full">
+                About Us
+              </span>
+              <h2 className="mt-6 text-3xl sm:text-4xl lg:text-[2.75rem] font-extrabold leading-[1.15] tracking-[-0.02em] font-display">
+                Your Reliable Partner
+                <br />
+                <span className="text-gradient-dark italic">in Pharma Growth</span>
+              </h2>
+              <p className="mt-5 text-gray-500 leading-relaxed">
+                {company.about.short}
+              </p>
 
-      {/* ─── Services Overview ─── */}
-      <section className="section-padding">
-        <div className="container-main">
+              {/* Service highlights */}
+              <div className="mt-8 space-y-6">
+                <div className="flex gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-brand-50 flex items-center justify-center shrink-0">
+                    <Handshake className="w-5 h-5 text-brand-500" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-navy-900">PCD Pharma Franchise</h3>
+                    <p className="mt-1 text-sm text-gray-500">
+                      Profitable monopoly-based franchise opportunities with complete marketing support and high-quality products.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-brand-50 flex items-center justify-center shrink-0">
+                    <Factory className="w-5 h-5 text-brand-500" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-navy-900">Third-Party Manufacturing</h3>
+                    <p className="mt-1 text-sm text-gray-500">
+                      Reliable, quality-driven manufacturing services with WHO-GMP-certified facilities and timely delivery.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-8">
+                <MagneticButton>
+                  <Link href="/about" className="btn-secondary">
+                    More About Us
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </MagneticButton>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   4. STATS SECTION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+function StatsSection() {
+  const stats = [
+    { icon: Package, value: 118, suffix: "+", label: "Quality Products" },
+    { icon: Award, value: 10, suffix: "+", label: "Years in Industry" },
+    { icon: Users, value: 500, suffix: "+", label: "Distribution Partners" },
+    { icon: MapPin, value: 20, suffix: "+", label: "States Covered" },
+  ];
+
+  return (
+    <section className="relative py-20 overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-900 to-navy-950" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(37,99,235,0.08),transparent_70%)]" />
+      <div className="container-main relative z-10">
+        <StaggerChildren className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12" staggerDelay={0.1}>
+          {stats.map((stat) => (
+            <StaggerItem key={stat.label}>
+              <div className="text-center group">
+                <div className="w-14 h-14 mx-auto rounded-2xl bg-white/[0.05] border border-white/[0.08] flex items-center justify-center mb-4 group-hover:bg-brand-500/20 group-hover:border-brand-500/30 transition-all duration-500">
+                  <stat.icon className="w-6 h-6 text-brand-400" />
+                </div>
+                <div className="text-3xl sm:text-4xl font-extrabold text-white font-display">
+                  <AnimatedCounter end={stat.value} suffix={stat.suffix} />
+                </div>
+                <div className="text-sm text-white/40 mt-2 font-medium">{stat.label}</div>
+              </div>
+            </StaggerItem>
+          ))}
+        </StaggerChildren>
+      </div>
+    </section>
+  );
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   5. SERVICES — Premium cards with 3D effect
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+function ServicesSection() {
+  const services = [
+    {
+      title: "PCD Pharma Franchise",
+      desc: "Start your own pharma business with exclusive monopoly rights, complete product range, competitive pricing, and marketing support.",
+      icon: Handshake,
+      href: "/pcd-pharma-franchise",
+      gradient: "from-blue-600 to-brand-500",
+    },
+    {
+      title: "Monopoly Rights",
+      desc: "Exclusive distribution rights in your territory — work freely with zero internal competition and maximum growth potential.",
+      icon: Shield,
+      gradient: "from-violet-600 to-purple-500",
+    },
+    {
+      title: "Third-Party Manufacturing",
+      desc: "Reliable and high-quality contract manufacturing with WHO-GMP certified production, advanced machinery, and timely delivery.",
+      icon: Factory,
+      href: "/third-party-manufacturing",
+      gradient: "from-cyan-600 to-teal-500",
+    },
+    {
+      title: "Marketing & Promotional Support",
+      desc: "Complete promotional assistance including visual aids, gift articles, product brochures, and marketing strategies.",
+      icon: TrendingUp,
+      gradient: "from-amber-600 to-orange-500",
+    },
+  ];
+
+  return (
+    <section className="section-padding bg-gray-50/50">
+      <div className="container-main">
+        {/* Section header */}
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-14">
           <Reveal>
-            <div className="text-center max-w-2xl mx-auto">
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-brand-600 bg-brand-50 rounded-full">
+            <div>
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-brand-600 bg-brand-50 rounded-full">
                 Our Services
               </span>
-              <h2 className="mt-5 text-display-sm md:text-display text-balance">
-                Complete Pharma{" "}
-                <GradientText>Business Solutions</GradientText>
+              <h2 className="mt-5 text-3xl sm:text-4xl lg:text-[2.75rem] font-extrabold leading-[1.15] tracking-[-0.02em] font-display">
+                Comprehensive Pharma Services
+                <br />
+                <span className="text-gradient-dark italic">for PCD & Manufacturing Growth</span>
               </h2>
-              <p className="mt-4 text-gray-500 text-lg">
-                Whether you want to start your own pharma franchise or need contract manufacturing, we have you covered.
-              </p>
             </div>
           </Reveal>
+          <Reveal delay={0.2}>
+            <Link href="/pcd-pharma-franchise" className="btn-secondary whitespace-nowrap">
+              View All Services
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </Reveal>
+        </div>
 
-          <div className="mt-14 grid md:grid-cols-2 gap-8">
-            <Reveal delay={0.1}>
-              <div className="group relative p-8 md:p-10 rounded-3xl border-2 border-brand-100 bg-gradient-to-br from-brand-50/50 to-white hover:shadow-glow transition-all duration-500 overflow-hidden">
-                <div className="absolute top-0 right-0 w-40 h-40 bg-brand-100/40 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-                <div className="relative">
-                  <div className="w-14 h-14 rounded-2xl bg-brand-500 text-white flex items-center justify-center shadow-lg shadow-brand-500/30">
-                    <Users className="w-7 h-7" />
-                  </div>
-                  <h3 className="mt-6 text-xl font-bold text-navy-900">PCD Pharma Franchise</h3>
-                  <p className="mt-3 text-gray-500 leading-relaxed">
-                    Start your own pharma business with exclusive distribution rights, marketing support, and our complete product portfolio. Low investment, high returns.
-                  </p>
-                  <ul className="mt-6 space-y-3">
-                    {["Monopoly rights available", "Free promotional materials", "Low investment required", "Complete product range"].map(
-                      (item) => (
-                        <li key={item} className="flex items-center gap-3 text-sm text-gray-600">
-                          <CheckCircle2 className="w-4 h-4 text-trust-green shrink-0" />
-                          {item}
-                        </li>
-                      )
+        {/* Cards Grid */}
+        <StaggerChildren className="grid md:grid-cols-2 gap-6" staggerDelay={0.1}>
+          {services.map((service) => (
+            <StaggerItem key={service.title}>
+              <TiltCard>
+                <div className="group relative overflow-hidden rounded-2xl bg-white border border-gray-100 shadow-card hover:shadow-premium transition-all duration-500">
+                  {/* Gradient top accent */}
+                  <div className={`h-1.5 bg-gradient-to-r ${service.gradient}`} />
+                  <div className="p-8 lg:p-10">
+                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${service.gradient} flex items-center justify-center shadow-lg mb-6`}>
+                      <service.icon className="w-6 h-6 text-white" />
+                    </div>
+                    <h3 className="text-xl font-bold text-navy-900 font-display">{service.title}</h3>
+                    <p className="mt-3 text-gray-500 leading-relaxed">{service.desc}</p>
+                    {service.href && (
+                      <Link
+                        href={service.href}
+                        className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand-500 hover:text-brand-600 group-hover:gap-3 transition-all"
+                      >
+                        Learn More
+                        <ArrowRight className="w-4 h-4" />
+                      </Link>
                     )}
-                  </ul>
-                  <Link href="/pcd-pharma-franchise" className="mt-8 btn-primary">
-                    Learn More <ArrowRight className="w-4 h-4" />
-                  </Link>
+                  </div>
                 </div>
-              </div>
-            </Reveal>
+              </TiltCard>
+            </StaggerItem>
+          ))}
+        </StaggerChildren>
+      </div>
+    </section>
+  );
+}
 
-            <Reveal delay={0.2}>
-              <div className="group relative p-8 md:p-10 rounded-3xl border-2 border-navy-100 bg-gradient-to-br from-navy-50/50 to-white hover:shadow-card-hover transition-all duration-500 overflow-hidden">
-                <div className="absolute top-0 right-0 w-40 h-40 bg-navy-100/40 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-                <div className="relative">
-                  <div className="w-14 h-14 rounded-2xl bg-navy-900 text-white flex items-center justify-center shadow-lg shadow-navy-900/30">
-                    <FlaskConical className="w-7 h-7" />
-                  </div>
-                  <h3 className="mt-6 text-xl font-bold text-navy-900">Third Party Manufacturing</h3>
-                  <p className="mt-3 text-gray-500 leading-relaxed">
-                    Leverage our WHO-GMP certified manufacturing facility for your brand. State-of-the-art production with strict quality control at competitive pricing.
-                  </p>
-                  <ul className="mt-6 space-y-3">
-                    {["WHO-GMP certified facility", "Custom formulations", "Quality assurance", "Competitive pricing"].map(
-                      (item) => (
-                        <li key={item} className="flex items-center gap-3 text-sm text-gray-600">
-                          <CheckCircle2 className="w-4 h-4 text-trust-green shrink-0" />
-                          {item}
-                        </li>
-                      )
-                    )}
-                  </ul>
-                  <Link href="/third-party-manufacturing" className="mt-8 btn-secondary">
-                    Learn More <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
-              </div>
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   6. WHY CHOOSE US — Interactive list + image
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+function WhyChooseSection() {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  return (
+    <section className="relative overflow-hidden">
+      <div className="grid lg:grid-cols-2 min-h-[600px]">
+        {/* Left - Content */}
+        <div className="section-padding bg-white">
+          <div className="max-w-xl ml-auto pr-8 lg:pr-16">
+            <Reveal>
+              <h2 className="text-3xl sm:text-4xl font-extrabold leading-[1.15] tracking-[-0.02em] font-display">
+                Why Choose{" "}
+                <span className="text-gradient">Trubeca Lifesciences</span>
+              </h2>
             </Reveal>
+            <div className="mt-10 space-y-0">
+              {whyChooseUs.map((item, i) => (
+                <motion.div
+                  key={item.num}
+                  className={`group cursor-pointer border-b border-gray-100 transition-all duration-500 ${
+                    activeIndex === i ? "py-6" : "py-5"
+                  }`}
+                  onClick={() => setActiveIndex(i)}
+                  initial={false}
+                >
+                  <div className="flex items-start gap-4">
+                    <span className={`text-sm font-bold font-display transition-colors duration-300 mt-0.5 ${
+                      activeIndex === i ? "text-brand-500" : "text-gray-300"
+                    }`}>
+                      {item.num}
+                    </span>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between">
+                        <h3 className={`font-bold transition-colors duration-300 ${
+                          activeIndex === i ? "text-navy-900" : "text-gray-600"
+                        }`}>
+                          {item.title}
+                        </h3>
+                        <ChevronRight className={`w-5 h-5 transition-all duration-300 shrink-0 ${
+                          activeIndex === i ? "text-brand-500 rotate-90" : "text-gray-300"
+                        }`} />
+                      </div>
+                      <motion.div
+                        initial={false}
+                        animate={{
+                          height: activeIndex === i ? "auto" : 0,
+                          opacity: activeIndex === i ? 1 : 0,
+                        }}
+                        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <p className="mt-3 text-sm text-gray-500 leading-relaxed pr-4">
+                          {item.desc}
+                        </p>
+                      </motion.div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
-      </section>
 
-      {/* ─── CTA Section ─── */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-brand-600 via-brand-500 to-accent-cyan" />
-        <div className="absolute inset-0">
-          <div 
-            className="absolute inset-0 opacity-[0.04]"
-            style={{
-              backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
-              backgroundSize: "40px 40px",
-            }}
-          />
+        {/* Right - Image */}
+        <div className="relative min-h-[400px] lg:min-h-0">
+          <div className="absolute inset-0">
+            <img
+              src="/images/facility.png"
+              alt="Trubeca Lifesciences Manufacturing Facility"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-navy-900/30" />
+          </div>
         </div>
-        
-        <div className="container-main relative z-10 py-20 md:py-28 text-center">
-          <Reveal>
-            <h2 className="text-display-sm md:text-display text-white text-balance">
-              Ready to Start Your Pharma Business?
+      </div>
+
+      {/* CTA banner */}
+      <div className="bg-navy-950">
+        <div className="container-main py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-sm text-white/60 text-center sm:text-left">
+            Our expert team is ready to support you with trusted PCD franchise and manufacturing solutions.
+          </p>
+          <Link href="/contact" className="btn-ghost text-sm px-6 py-2.5 whitespace-nowrap">
+            Contact Us
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   7. CATEGORIES — Product categories showcase
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+function CategoriesSection() {
+  return (
+    <section className="section-padding">
+      <div className="container-main">
+        <Reveal>
+          <div className="text-center max-w-2xl mx-auto">
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-brand-600 bg-brand-50 rounded-full">
+              Product Range
+            </span>
+            <h2 className="mt-5 text-3xl sm:text-4xl font-extrabold tracking-[-0.02em] font-display">
+              New Range of <span className="text-gradient italic">Products</span>
             </h2>
-            <p className="mt-5 text-lg text-white/70 max-w-2xl mx-auto">
-              Join hands with Trubeca Life Sciences and build a successful pharmaceutical business with our proven PCD Franchise model.
+            <p className="mt-4 text-gray-500 text-lg">
+              Explore our comprehensive portfolio of WHO-GMP certified pharmaceutical formulations.
             </p>
-            <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+          </div>
+        </Reveal>
+
+        <StaggerChildren className="mt-14 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5" staggerDelay={0.08}>
+          {categoriesData.categories.map((cat) => (
+            <StaggerItem key={cat.id}>
+              <Link href={`/products?category=${cat.slug}`}>
+                <TiltCard>
+                  <div className="group relative p-6 bg-white rounded-2xl border border-gray-100 shadow-card hover:shadow-card-hover transition-all duration-500">
+                    <div className="w-14 h-14 rounded-2xl bg-brand-50 text-brand-500 flex items-center justify-center group-hover:bg-brand-500 group-hover:text-white group-hover:scale-110 transition-all duration-300 mb-4">
+                      {categoryIcons[cat.slug] || <Pill className="w-6 h-6" />}
+                    </div>
+                    <h3 className="font-bold text-navy-900 text-sm group-hover:text-brand-600 transition-colors">
+                      {cat.name}
+                    </h3>
+                    <p className="mt-1 text-xs text-gray-400">
+                      {cat.productCount} Products
+                    </p>
+                    <div className="mt-4 pt-3 border-t border-gray-50">
+                      <span className="text-xs font-semibold text-brand-500 group-hover:text-brand-600 inline-flex items-center gap-1">
+                        Browse
+                        <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                      </span>
+                    </div>
+                  </div>
+                </TiltCard>
+              </Link>
+            </StaggerItem>
+          ))}
+        </StaggerChildren>
+
+        <Reveal delay={0.3}>
+          <div className="mt-10 text-center">
+            <Link href="/products" className="btn-primary">
+              View All Products
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   8. TESTIMONIALS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+function TestimonialsSection() {
+  return (
+    <section className="section-padding bg-gray-50/50">
+      <div className="container-main">
+        <div className="grid lg:grid-cols-5 gap-12 lg:gap-16">
+          {/* Left text */}
+          <div className="lg:col-span-2">
+            <Reveal>
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-brand-600 bg-brand-50 rounded-full">
+                Happy Partners
+              </span>
+              <h2 className="mt-5 text-3xl sm:text-4xl font-extrabold tracking-[-0.02em] leading-tight font-display">
+                Building Trust Through Client Satisfaction
+              </h2>
+              <p className="mt-4 text-sm uppercase tracking-wider font-semibold text-brand-500">
+                What they say about Trubeca Lifesciences
+              </p>
+              <p className="mt-4 text-gray-500 leading-relaxed">
+                We are dedicated to providing innovative healthcare solutions, professional service, and long-term partnerships. Our franchise and third-party clients appreciate our commitment to quality and transparency.
+              </p>
+            </Reveal>
+          </div>
+
+          {/* Right - testimonial cards */}
+          <div className="lg:col-span-3">
+            <StaggerChildren className="grid sm:grid-cols-2 gap-5" staggerDelay={0.1}>
+              {testimonials.map((t) => (
+                <StaggerItem key={t.name}>
+                  <div className="p-6 bg-white rounded-2xl border border-gray-100 shadow-card hover:shadow-card-hover transition-all duration-500">
+                    {/* Stars */}
+                    <div className="flex gap-0.5 mb-4">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <Star
+                          key={i}
+                          className={`w-4 h-4 ${i < t.rating ? "text-amber-400 fill-amber-400" : "text-gray-200"}`}
+                        />
+                      ))}
+                    </div>
+                    <p className="text-sm text-gray-600 leading-relaxed italic">
+                      &ldquo;{t.text}&rdquo;
+                    </p>
+                    <div className="mt-5 pt-4 border-t border-gray-50">
+                      <p className="font-bold text-navy-900 text-sm">{t.name}</p>
+                      <p className="text-xs text-gray-400 mt-0.5">{t.role}</p>
+                    </div>
+                  </div>
+                </StaggerItem>
+              ))}
+            </StaggerChildren>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   9. MANUFACTURING PLANT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+function ManufacturingSection() {
+  return (
+    <section className="py-20 bg-white">
+      <div className="container-main">
+        <Reveal>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-[-0.02em] font-display">
+              Our Manufacturing <span className="text-gradient italic">Plant</span>
+            </h2>
+            <p className="mt-3 text-gray-500">
+              WHO-GMP certified state-of-the-art pharmaceutical manufacturing facilities
+            </p>
+          </div>
+        </Reveal>
+        <StaggerChildren className="grid grid-cols-1 md:grid-cols-3 gap-5" staggerDelay={0.1}>
+          {[1, 2, 3].map((i) => (
+            <StaggerItem key={i}>
+              <TiltCard>
+                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 shadow-card">
+                  {/* Replace with actual manufacturing plant photos */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="text-center">
+                      <Factory className="w-10 h-10 text-gray-300 mx-auto" />
+                      <p className="mt-2 text-xs text-gray-400">Plant Photo {i}</p>
+                    </div>
+                  </div>
+                </div>
+              </TiltCard>
+            </StaggerItem>
+          ))}
+        </StaggerChildren>
+      </div>
+    </section>
+  );
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   10. CTA + CONTACT FORM
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+function CTASection() {
+  const [formData, setFormData] = useState({ name: "", email: "", phone: "", location: "", message: "" });
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("submitting");
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: "YOUR_WEB3FORMS_KEY",
+          subject: "New Enquiry from Trubeca Website",
+          ...formData,
+        }),
+      });
+      if (res.ok) {
+        setStatus("success");
+        setFormData({ name: "", email: "", phone: "", location: "", message: "" });
+      } else setStatus("error");
+    } catch {
+      setStatus("error");
+    }
+  };
+
+  return (
+    <section className="relative overflow-hidden">
+      <div className="grid lg:grid-cols-2">
+        {/* Left - CTA visual */}
+        <div className="relative min-h-[500px] bg-gradient-to-br from-navy-950 via-navy-900 to-brand-900 overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(37,99,235,0.15),transparent_60%)]" />
+          <div className="relative z-10 flex flex-col justify-center h-full p-10 lg:p-16">
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-white/60 bg-white/[0.06] rounded-full border border-white/[0.08] w-fit">
+              Join Hands With Us
+            </span>
+            <h2 className="mt-6 text-3xl sm:text-4xl font-extrabold text-white leading-tight font-display">
+              Grow with Trubeca
+              <br />
+              Lifesciences
+            </h2>
+            <p className="mt-2 text-xl text-white/40 italic font-display">
+              PCD & Third-Party Manufacturing
+            </p>
+            <p className="mt-6 text-white/50 leading-relaxed max-w-md">
+              Partner with <strong className="text-white/80">Trubeca Lifesciences</strong>, a trusted pharma company offering high-quality formulations, monopoly-based PCD pharma franchise opportunities, and reliable third-party manufacturing services.
+            </p>
+            <div className="mt-8">
               <MagneticButton>
-                <Link
-                  href="/contact"
-                  className="group inline-flex items-center gap-2.5 px-8 py-4 bg-white text-brand-600 font-semibold rounded-full hover:bg-gray-50 transition-all duration-300 shadow-xl shadow-black/10"
-                >
-                  Get Started Today
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <Link href="/pcd-pharma-franchise" className="btn-ghost">
+                  Get Free Consultation
+                  <ArrowRight className="w-4 h-4" />
                 </Link>
               </MagneticButton>
-              <MagneticButton>
-                <a
-                  href="https://wa.me/918699826998"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2.5 px-8 py-4 border-2 border-white/25 text-white font-semibold rounded-full hover:bg-white/10 hover:border-white/40 transition-all duration-300"
-                >
-                  WhatsApp Us
-                </a>
-              </MagneticButton>
             </div>
-          </Reveal>
+          </div>
         </div>
-      </section>
-    </>
+
+        {/* Right - Contact form */}
+        <div className="bg-brand-50/30 p-8 lg:p-16 flex items-center">
+          <div className="w-full max-w-lg mx-auto">
+            {status === "success" ? (
+              <div className="text-center py-16">
+                <CheckCircle2 className="w-16 h-16 text-accent-emerald mx-auto mb-4" />
+                <h3 className="text-2xl font-bold text-navy-900 font-display">Thank You!</h3>
+                <p className="mt-2 text-gray-500">We will get back to you within 24 hours.</p>
+                <button onClick={() => setStatus("idle")} className="mt-4 text-sm font-semibold text-brand-500 hover:text-brand-600">
+                  Send another enquiry
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <input
+                    type="text"
+                    placeholder="Your Name"
+                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="input-field"
+                  />
+                  <input
+                    type="email"
+                    placeholder="Your Email"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className="input-field"
+                  />
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <input
+                    type="tel"
+                    placeholder="Your Contact"
+                    required
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    className="input-field"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Your Location"
+                    value={formData.location}
+                    onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+                    className="input-field"
+                  />
+                </div>
+                <textarea
+                  placeholder="Write your message"
+                  rows={5}
+                  required
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  className="input-field resize-none"
+                />
+                <button
+                  type="submit"
+                  disabled={status === "submitting"}
+                  className="w-full py-4 text-sm font-semibold text-white bg-navy-900 rounded-xl hover:bg-navy-800 transition-all duration-300 shadow-lg shadow-navy-900/20 disabled:opacity-50"
+                >
+                  {status === "submitting" ? "Sending..." : "Submit"}
+                </button>
+                {status === "error" && (
+                  <p className="text-sm text-red-500 text-center">Something went wrong. Please try again.</p>
+                )}
+              </form>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }

@@ -1,272 +1,160 @@
-import type { Metadata } from "next";
+"use client";
+
 import Link from "next/link";
 import {
-  ArrowRight,
-  Shield,
-  FlaskConical,
-  Factory,
-  Package,
-  Award,
-  ClipboardCheck,
-  Microscope,
-  CheckCircle2,
-  Sparkles,
+  ArrowRight, Factory, Shield, Clock, Award, FlaskConical,
+  CheckCircle2, Sparkles, Package, Settings,
 } from "lucide-react";
-import { Reveal, StaggerChildren, StaggerItem, GradientText } from "@/components/ui/animations";
+import { Reveal, StaggerChildren, StaggerItem, GradientText, TiltCard, AnimatedCounter } from "@/components/ui/animations";
 import EnquiryForm from "@/components/shared/EnquiryForm";
 
-export const metadata: Metadata = {
-  title: "Third Party Manufacturing",
-  description:
-    "WHO-GMP certified Third Party Manufacturing / Contract Manufacturing services by Trubeca Life Sciences. Custom formulations, quality assurance, and competitive pricing.",
-};
-
 const capabilities = [
-  {
-    icon: Factory,
-    title: "State-of-the-Art Facility",
-    description:
-      "Our manufacturing plant is equipped with modern machinery and automated production lines for consistent output.",
-  },
-  {
-    icon: Shield,
-    title: "WHO-GMP & ISO Certified",
-    description:
-      "Our facility adheres to WHO-GMP standards and is ISO 9001:2015 certified, ensuring the highest quality at every step.",
-  },
-  {
-    icon: FlaskConical,
-    title: "Custom Formulations",
-    description:
-      "We can develop and manufacture custom formulations tailored to your brand requirements and market needs.",
-  },
-  {
-    icon: Microscope,
-    title: "Quality Testing Lab",
-    description:
-      "In-house quality control laboratory with advanced analytical instruments for rigorous testing of raw materials and finished products.",
-  },
-  {
-    icon: ClipboardCheck,
-    title: "Regulatory Compliance",
-    description:
-      "Full documentation and regulatory support including DCGI approvals, stability studies, and batch records.",
-  },
-  {
-    icon: Package,
-    title: "Flexible Packaging",
-    description:
-      "Multiple packaging options available — blister packs, ALU-ALU, strip packing, bottles, and custom designs with your branding.",
-  },
+  { icon: Factory, title: "Custom Formulations", desc: "We develop and manufacture custom formulations based on your specifications and market requirements." },
+  { icon: Shield, title: "WHO-GMP Certified", desc: "Our manufacturing facilities meet international WHO-GMP standards for quality and safety." },
+  { icon: Clock, title: "Timely Delivery", desc: "We ensure on-time delivery with efficient production planning and logistics management." },
+  { icon: Award, title: "Quality Assurance", desc: "Multi-stage quality checks — raw material testing, in-process checks, and finished product analysis." },
+  { icon: Package, title: "Flexible Packaging", desc: "Multiple packaging options including blister, alu-alu, bottle, tube, and custom packaging solutions." },
+  { icon: Settings, title: "Advanced Machinery", desc: "State-of-the-art manufacturing equipment for tablets, capsules, liquids, injectables, and topicals." },
 ];
 
-const dosageForms = [
-  "Tablets",
-  "Capsules",
-  "Syrups",
-  "Dry Syrups",
-  "Injections (Liquid & Dry)",
-  "Ointments & Creams",
-  "Drops",
-  "Sachets & Powders",
+const processSteps = [
+  { num: "01", title: "Requirement Analysis", desc: "Share your formulation requirements and specifications." },
+  { num: "02", title: "Formulation Development", desc: "Our R&D team develops and optimizes the formulation." },
+  { num: "03", title: "Sample & Approval", desc: "We provide product samples for your testing and approval." },
+  { num: "04", title: "Bulk Production", desc: "Full-scale manufacturing with quality checks at every stage." },
+  { num: "05", title: "Packaging & Delivery", desc: "Custom packaging and timely delivery to your location." },
 ];
 
 export default function ThirdPartyPage() {
   return (
     <>
-      {/* ─── Page Header ─── */}
+      {/* ── Hero ── */}
       <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden bg-navy-950">
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-navy-950 via-navy-900 to-brand-900" />
-          <div className="absolute bottom-1/4 right-0 w-[500px] h-[500px] bg-accent-cyan/10 rounded-full blur-[120px]" />
-        </div>
+        <div className="absolute inset-0 bg-gradient-to-br from-navy-950 via-navy-900 to-brand-900/80" />
+        <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-accent-cyan/[0.07] rounded-full blur-[150px]" />
         <div className="container-main relative z-10">
           <Reveal>
-            <span className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium uppercase tracking-wider bg-white/5 text-white/70 rounded-full border border-white/10">
-              <Sparkles className="w-3.5 h-3.5" />
-              Contract Manufacturing
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-white/60 bg-white/[0.04] rounded-full border border-white/[0.08]">
+              <Factory className="w-3.5 h-3.5" /> Manufacturing Services
             </span>
-            <h1 className="mt-6 text-display-sm md:text-display-lg text-white text-balance">
-              Third Party <GradientText>Manufacturing</GradientText>
+            <h1 className="mt-6 text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-[-0.03em] leading-[1.05] font-display">
+              Third-Party <span className="text-gradient">Manufacturing</span>
             </h1>
-            <p className="mt-4 text-lg text-white/50 max-w-2xl">
-              Leverage our WHO-GMP certified facility for your brand. Quality manufacturing at competitive pricing.
+            <p className="mt-5 text-lg text-white/40 max-w-2xl">
+              Reliable contract manufacturing with best price assurance, WHO-GMP certified facilities, and timely delivery.
             </p>
           </Reveal>
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white to-transparent" />
       </section>
 
-      {/* ─── Overview ─── */}
+      {/* ── Capabilities ── */}
       <section className="section-padding">
-        <div className="container-main">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <Reveal direction="left">
-              <div>
-                <span className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-brand-600 bg-brand-50 rounded-full">
-                  Contract Manufacturing
-                </span>
-                <h2 className="mt-5 text-display-sm md:text-display text-balance">
-                  Your Brand, Our <GradientText>Expertise</GradientText>
-                </h2>
-                <div className="mt-6 space-y-4 text-gray-500 leading-relaxed">
-                  <p>
-                    Trubeca Life Sciences offers comprehensive Third Party Manufacturing services
-                    for pharmaceutical companies looking to expand their product portfolio without
-                    investing in manufacturing infrastructure.
-                  </p>
-                  <p>
-                    With our WHO-GMP certified facility, experienced R&D team, and rigorous quality
-                    control processes, we ensure that every product manufactured under your brand
-                    meets the highest standards of quality and efficacy.
-                  </p>
-                </div>
-                <div className="mt-8 flex flex-wrap gap-4">
-                  <Link href="/contact" className="btn-primary">
-                    Get a Quote <ArrowRight className="w-4 h-4" />
-                  </Link>
-                  <Link href="/certifications" className="btn-secondary">
-                    Our Certifications
-                  </Link>
-                </div>
-              </div>
-            </Reveal>
-            <Reveal direction="right" delay={0.2}>
-              <div className="relative">
-                <div className="absolute -inset-4 bg-gradient-to-br from-navy-50 to-brand-50 rounded-3xl rotate-2" />
-                <div className="relative aspect-[4/3] bg-gradient-to-br from-navy-100 to-brand-50 rounded-2xl flex items-center justify-center overflow-hidden">
-                  <div className="absolute inset-0 gradient-mesh opacity-40" />
-                  <Factory className="w-24 h-24 text-navy-300 relative z-10" />
-                </div>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── Capabilities ─── */}
-      <section className="section-padding bg-gray-50/50">
         <div className="container-main">
           <Reveal>
             <div className="text-center max-w-2xl mx-auto">
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-brand-600 bg-brand-50 rounded-full">
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-brand-600 bg-brand-50 rounded-full">
                 Our Capabilities
               </span>
-              <h2 className="mt-5 text-display-sm md:text-display text-balance">
-                Manufacturing <GradientText>Excellence</GradientText>
+              <h2 className="mt-5 text-3xl sm:text-4xl font-extrabold tracking-[-0.02em] font-display">
+                Manufacturing <span className="text-gradient italic">Excellence</span>
               </h2>
               <p className="mt-4 text-gray-500 text-lg">
-                We bring world-class manufacturing capabilities to your brand.
+                End-to-end manufacturing services from formulation development to final packaging.
               </p>
             </div>
           </Reveal>
           <StaggerChildren className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-6" staggerDelay={0.08}>
-            {capabilities.map((cap) => (
-              <StaggerItem key={cap.title}>
-                <div className="group p-6 md:p-8 bg-white rounded-2xl border border-gray-100 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-500">
-                  <div className="w-12 h-12 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center group-hover:bg-brand-500 group-hover:text-white group-hover:scale-110 transition-all duration-300">
-                    <cap.icon className="w-6 h-6" />
+            {capabilities.map((c) => (
+              <StaggerItem key={c.title}>
+                <TiltCard>
+                  <div className="group p-6 md:p-8 bg-white rounded-2xl border border-gray-100 shadow-card hover:shadow-card-hover transition-all duration-500 h-full">
+                    <div className="w-12 h-12 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center group-hover:bg-brand-500 group-hover:text-white group-hover:scale-110 transition-all duration-300">
+                      <c.icon className="w-6 h-6" />
+                    </div>
+                    <h3 className="mt-5 font-bold text-navy-900">{c.title}</h3>
+                    <p className="mt-3 text-sm text-gray-500 leading-relaxed">{c.desc}</p>
                   </div>
-                  <h3 className="mt-5 font-semibold text-navy-900">{cap.title}</h3>
-                  <p className="mt-3 text-sm text-gray-500 leading-relaxed">{cap.description}</p>
-                </div>
+                </TiltCard>
               </StaggerItem>
             ))}
           </StaggerChildren>
         </div>
       </section>
 
-      {/* ─── Dosage Forms ─── */}
-      <section className="section-padding relative overflow-hidden">
-        <div className="absolute inset-0 bg-navy-950" />
-        <div className="absolute inset-0">
-          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent-cyan/10 rounded-full blur-[100px]" />
+      {/* ── Process ── */}
+      <section className="section-padding bg-gray-50/50">
+        <div className="container-main">
+          <Reveal>
+            <div className="text-center max-w-2xl mx-auto mb-14">
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-brand-600 bg-brand-50 rounded-full">
+                Our Process
+              </span>
+              <h2 className="mt-5 text-3xl sm:text-4xl font-extrabold tracking-[-0.02em] font-display">
+                How It <span className="text-gradient italic">Works</span>
+              </h2>
+            </div>
+          </Reveal>
+          <div className="max-w-3xl mx-auto">
+            <StaggerChildren className="space-y-0" staggerDelay={0.1}>
+              {processSteps.map((s, i) => (
+                <StaggerItem key={s.num}>
+                  <div className="flex gap-6 pb-8">
+                    <div className="flex flex-col items-center">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-brand-500 to-brand-600 text-white flex items-center justify-center text-sm font-bold shadow-lg shadow-brand-500/20 shrink-0 font-display">
+                        {s.num}
+                      </div>
+                      {i < processSteps.length - 1 && <div className="w-px flex-1 bg-gray-200 mt-2" />}
+                    </div>
+                    <div className="pt-2 pb-4">
+                      <h3 className="font-bold text-navy-900">{s.title}</h3>
+                      <p className="mt-1 text-sm text-gray-500">{s.desc}</p>
+                    </div>
+                  </div>
+                </StaggerItem>
+              ))}
+            </StaggerChildren>
+          </div>
         </div>
+      </section>
+
+      {/* ── Product Types ── */}
+      <section className="relative py-20 overflow-hidden">
+        <div className="absolute inset-0 bg-navy-950" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(6,182,212,0.06),transparent_70%)]" />
         <div className="container-main relative z-10">
           <Reveal>
             <div className="text-center max-w-2xl mx-auto">
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-brand-300 bg-white/5 rounded-full border border-white/10">
-                Dosage Forms
-              </span>
-              <h2 className="mt-5 text-display-sm md:text-display text-white text-balance">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-[-0.02em] font-display">
                 What We Manufacture
               </h2>
-              <p className="mt-4 text-white/50 text-lg">
-                We offer manufacturing across all major pharmaceutical dosage forms.
-              </p>
+              <p className="mt-4 text-white/50">Complete range of pharmaceutical dosage forms.</p>
             </div>
           </Reveal>
           <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
-            {dosageForms.map((form) => (
-              <div
-                key={form}
-                className="flex items-center gap-3 bg-white/[0.04] border border-white/[0.08] rounded-xl p-4 backdrop-blur-sm hover:bg-white/[0.08] transition-colors"
-              >
-                <CheckCircle2 className="w-5 h-5 text-brand-400 shrink-0" />
-                <span className="text-sm font-medium text-white/80">{form}</span>
+            {["Tablets", "Capsules (Hard/Soft)", "Liquid Syrups", "Dry Syrups", "Injectable Ampoules", "Injectable Vials", "Creams & Ointments", "Protein Powders"].map((item) => (
+              <div key={item} className="flex items-center gap-3 bg-white/[0.04] border border-white/[0.08] rounded-xl p-4 hover:bg-white/[0.08] transition-colors">
+                <CheckCircle2 className="w-4 h-4 text-accent-cyan shrink-0" />
+                <span className="text-sm text-white/80">{item}</span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ─── Process ─── */}
+      {/* ── Enquiry Form ── */}
       <section className="section-padding">
-        <div className="container-main">
+        <div className="container-main max-w-2xl">
           <Reveal>
-            <div className="text-center max-w-2xl mx-auto">
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-brand-600 bg-brand-50 rounded-full">
-                Our Process
-              </span>
-              <h2 className="mt-5 text-display-sm md:text-display text-balance">
-                How It <GradientText>Works</GradientText>
+            <div className="text-center mb-10">
+              <h2 className="text-3xl font-extrabold tracking-[-0.02em] font-display">
+                Get a <span className="text-gradient italic">Manufacturing Quote</span>
               </h2>
-              <p className="mt-4 text-gray-500 text-lg">
-                A streamlined process from enquiry to delivery.
-              </p>
+              <p className="mt-3 text-gray-500">Share your requirements and we will provide a competitive quote within 24 hours.</p>
             </div>
           </Reveal>
-          <StaggerChildren className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-6" staggerDelay={0.1}>
-            {[
-              { step: "01", title: "Enquiry & Discussion", desc: "Share your requirements — products, quantity, packaging preferences." },
-              { step: "02", title: "Quotation & Agreement", desc: "We provide competitive pricing and terms. Sign the manufacturing agreement." },
-              { step: "03", title: "Manufacturing", desc: "Production begins in our GMP-certified facility with strict quality checks." },
-              { step: "04", title: "QC & Delivery", desc: "Rigorous quality testing followed by packaging and dispatch to your location." },
-            ].map((s) => (
-              <StaggerItem key={s.step}>
-                <div className="text-center p-6 bg-white rounded-2xl border border-gray-100 shadow-card">
-                  <div className="w-14 h-14 mx-auto rounded-2xl bg-gradient-to-br from-navy-800 to-navy-900 text-brand-400 flex items-center justify-center text-xl font-bold shadow-lg">
-                    {s.step}
-                  </div>
-                  <h3 className="mt-5 font-semibold text-navy-900">{s.title}</h3>
-                  <p className="mt-2 text-sm text-gray-500">{s.desc}</p>
-                </div>
-              </StaggerItem>
-            ))}
-          </StaggerChildren>
-        </div>
-      </section>
-
-      {/* ─── Enquiry ─── */}
-      <section className="section-padding bg-gray-50/50">
-        <div className="container-main">
-          <div className="max-w-2xl mx-auto">
-            <Reveal>
-              <div className="text-center">
-                <span className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-brand-600 bg-brand-50 rounded-full">
-                  Get a Quote
-                </span>
-                <h2 className="mt-5 text-display-sm text-balance">
-                  Request Third Party <GradientText>Manufacturing</GradientText>
-                </h2>
-                <p className="mt-4 text-gray-500">
-                  Tell us your requirements and we&apos;ll get back to you with a competitive quote.
-                </p>
-              </div>
-            </Reveal>
-            <div className="mt-10 bg-white rounded-2xl p-6 md:p-8 border border-gray-100 shadow-card">
-              <EnquiryForm />
-            </div>
+          <div className="bg-white rounded-2xl p-6 md:p-10 border border-gray-100 shadow-card">
+            <EnquiryForm />
           </div>
         </div>
       </section>
