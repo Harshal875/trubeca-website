@@ -11,7 +11,7 @@ import EnquiryForm from "@/components/shared/EnquiryForm";
 const benefits = [
   { icon: MapPin, title: "Monopoly Distribution Rights", desc: "Get exclusive distribution rights in your territory. No competition from other franchisees in your area." },
   { icon: Gift, title: "Free Promotional Materials", desc: "Visual aids, product cards, brochures, MR bags, catch covers, and other marketing tools free of cost." },
-  { icon: Package, title: "118+ Quality Products", desc: "Access our complete portfolio of WHO-GMP certified products across tablets, capsules, syrups, injections, and more." },
+  { icon: Package, title: "200+ Quality Products", desc: "Access our complete portfolio of WHO-GMP certified products across tablets, capsules, syrups, injections, and more." },
   { icon: TrendingUp, title: "Low Investment, High Returns", desc: "Start your pharma business with minimal investment. Enjoy high profit margins and quick ROI." },
   { icon: Handshake, title: "Complete Business Support", desc: "From marketing strategies to regulatory guidance, we support you at every step of your journey." },
   { icon: Award, title: "Quality Assurance", desc: "All products manufactured in WHO-GMP, ISO 9001:2015, and FSSAI certified facilities with strict quality control." },
@@ -122,7 +122,7 @@ export default function PCDFranchisePage() {
                 Complete Pharma Product Portfolio
               </h2>
               <p className="mt-4 text-white/50 text-lg">
-                Our franchise partners get access to 118+ products across all major therapeutic segments.
+                Our franchise partners get access to 200+ products across all major therapeutic segments.
               </p>
             </div>
           </Reveal>

@@ -28,7 +28,7 @@ const categoryIcons: Record<string, React.ReactNode> = {
 
 const trustMessages = [
   "ISO 9001:2015 Certified Manufacturing",
-  "118+ WHO-GMP Pharmaceutical Products",
+  "200+ WHO-GMP Pharmaceutical Products",
   "500+ Distribution Partners Nationwide",
   "10+ Years of Pharmaceutical Excellence",
   "FSSAI & DCGI Approved Products",
@@ -73,7 +73,7 @@ const whyChooseUs = [
   {
     num: "02",
     title: "Extensive Range of WHO-GMP Certified Products",
-    desc: "118+ pharmaceutical formulations across 7 therapeutic categories — tablets, capsules, syrups, injections, and specialty products.",
+    desc: "200+ pharmaceutical formulations across 7 therapeutic categories — tablets, capsules, syrups, injections, and specialty products.",
   },
   {
     num: "03",
@@ -161,7 +161,7 @@ function HeroSection() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-8 text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-[-0.03em] leading-tight font-display"
+            className="mt-8 text-xl sm:text-2xl md:text-3xl font-extrabold text-white tracking-[-0.03em] leading-tight font-display"
           >
             Redefining <span className="text-gradient">Pharmaceutical Excellence</span>
           </motion.h1>
@@ -173,7 +173,7 @@ function HeroSection() {
             transition={{ duration: 0.8, delay: 0.7 }}
             className="mt-6 text-base sm:text-lg text-white/40 max-w-2xl mx-auto leading-relaxed"
           >
-            Empowering healthcare with 118+ certified products. Your trusted partner
+            Empowering healthcare with 200+ certified products. Your trusted partner
             for PCD Pharma Franchise & Third-Party Manufacturing across India.
           </motion.p>
 
@@ -206,7 +206,7 @@ function HeroSection() {
             className="mt-16 lg:mt-24 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto"
           >
             {[
-              { value: 118, suffix: "+", label: "Products" },
+              { value: 200, suffix: "+", label: "Products" },
               { value: 10, suffix: "+", label: "Years" },
               { value: 500, suffix: "+", label: "Partners" },
               { value: 7, suffix: "", label: "Categories" },
@@ -350,7 +350,7 @@ function AboutPreview() {
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 function StatsSection() {
   const stats = [
-    { icon: Package, value: 118, suffix: "+", label: "Quality Products" },
+    { icon: Package, value: 200, suffix: "+", label: "Quality Products" },
     { icon: Award, value: 10, suffix: "+", label: "Years in Industry" },
     { icon: Users, value: 500, suffix: "+", label: "Distribution Partners" },
     { icon: MapPin, value: 20, suffix: "+", label: "States Covered" },

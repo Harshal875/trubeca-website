@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     template: "%s | Trubeca Lifesciences",
   },
   description:
-    "Trubeca Lifesciences — ISO 9001:2015 certified pharmaceutical company with 118+ WHO-GMP products. Leading PCD Pharma Franchise opportunities and Third Party Manufacturing across India.",
+    "Trubeca Lifesciences — ISO 9001:2015 certified pharmaceutical company with 200+ WHO-GMP products. Leading PCD Pharma Franchise opportunities and Third Party Manufacturing across India.",
   keywords: [
     "pharma franchise",
     "PCD pharma",

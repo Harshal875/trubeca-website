@@ -40,7 +40,7 @@ export default function Footer() {
                 </span>
               </Link>
               <p className="mt-5 text-sm text-gray-400 leading-relaxed max-w-xs">
-                ISO 9001:2015 certified pharmaceutical company delivering 118+ quality healthcare products through PCD Franchise & Contract Manufacturing.
+                ISO 9001:2015 certified pharmaceutical company delivering 200+ quality healthcare products through PCD Franchise & Contract Manufacturing.
               </p>
               <div className="mt-6 flex flex-wrap gap-2">
                 {company.certifications.map((cert) => (

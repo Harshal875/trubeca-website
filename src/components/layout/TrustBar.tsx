@@ -2,7 +2,7 @@ import { Settings2 } from "lucide-react";
 
 const items = [
   "ISO 9001:2015 Certified Manufacturing",
-  "118+ WHO-GMP Pharmaceutical Products",
+  "200+ WHO-GMP Pharmaceutical Products",
   "500+ Distribution Partners Nationwide",
   "10+ Years of Pharmaceutical Excellence",
   "FSSAI & DCGI Approved Products",

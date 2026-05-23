@@ -134,7 +134,7 @@ export default function AboutPage() {
         <div className="container-main relative z-10">
           <StaggerChildren className="grid grid-cols-2 lg:grid-cols-4 gap-8" staggerDelay={0.1}>
             {[
-              { value: 118, suffix: "+", label: "Products" },
+              { value: 200, suffix: "+", label: "Products" },
               { value: 10, suffix: "+", label: "Years" },
               { value: 500, suffix: "+", label: "Partners" },
               { value: 7, suffix: "", label: "Categories" },

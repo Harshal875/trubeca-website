@@ -39,7 +39,7 @@ export default function ProductsPage() {
               Our <span className="text-gradient">Products</span>
             </h1>
             <p className="mt-5 text-lg text-white/40 max-w-xl">
-              Explore 118+ WHO-GMP certified pharmaceutical products across 7 therapeutic categories.
+              Explore 200+ WHO-GMP certified pharmaceutical products across 7 therapeutic categories.
             </p>
           </Reveal>
         </div>
