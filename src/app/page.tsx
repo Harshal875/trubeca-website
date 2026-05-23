@@ -142,7 +142,7 @@ function HeroSection() {
       <div className="absolute inset-0 bg-gradient-to-t from-navy-950/90 via-navy-950/50 to-navy-950/70" />
 
       {/* Content */}
-      <motion.div className="container-main relative z-10 pt-32 pb-20 lg:pt-40 lg:pb-28" style={{ opacity }}>
+      <motion.div className="container-main relative z-10 pt-48 pb-20 lg:pt-56 lg:pb-28" style={{ opacity }}>
         <div className="max-w-4xl mx-auto text-center">
           {/* Certification badge */}
           <motion.div
@@ -161,7 +161,7 @@ function HeroSection() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-8 text-xl sm:text-2xl md:text-3xl font-extrabold text-white tracking-[-0.03em] leading-tight font-display"
+            className="mt-8 text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-[-0.03em] leading-tight font-display"
           >
             Redefining <span className="text-gradient">Pharmaceutical Excellence</span>
           </motion.h1>
@@ -203,7 +203,7 @@ function HeroSection() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1.2 }}
-            className="mt-16 lg:mt-24 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto"
+            className="mt-8 lg:mt-10 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto"
           >
             {[
               { value: 200, suffix: "+", label: "Products" },
