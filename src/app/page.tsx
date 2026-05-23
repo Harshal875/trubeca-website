@@ -161,12 +161,9 @@ function HeroSection() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-8 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-[-0.03em] leading-[1.05] font-display"
+            className="mt-8 text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-[-0.03em] leading-tight font-display"
           >
-            Redefining{" "}
-            <span className="text-gradient">Pharmaceutical</span>
-            <br />
-            Excellence
+            Redefining <span className="text-gradient">Pharmaceutical Excellence</span>
           </motion.h1>
 
           {/* Subtitle */}
